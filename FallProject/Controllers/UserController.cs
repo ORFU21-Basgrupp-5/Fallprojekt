@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using API.DTO;
+using Microsoft.AspNetCore.Mvc;
 using SERVICES;
 
 namespace API.Controllers
@@ -15,6 +16,17 @@ namespace API.Controllers
                 return Ok(result);
             }
             return BadRequest();
+        }
+
+        [HttpPost("register")]
+        public IActionResult Register(UserDTO newUser)
+        {
+            
+                var result = UserService.Instance.RegisterNewAccount(newUser.UserName, newUser.Password, newUser.Email);
+                if(result)
+                return Ok(result);
+                return BadRequest();
+         
         }
     }
 }

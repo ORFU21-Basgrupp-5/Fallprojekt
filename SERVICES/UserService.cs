@@ -1,4 +1,5 @@
 ﻿using DAL;
+using DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,5 +39,30 @@ namespace SERVICES
             }
             return false;
         }
+        public bool RegisterNewAccount(string userName,string password,string mail)
+        {
+            try
+            {
+                using (var context = new BudgetContext())
+                {
+                    var user = context.Users;
+                    var newUser = new User() { UserName = userName, Password = password, Email = mail };
+                    user.Add(newUser);
+                    context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+               
+      
+
+           
+        }
+
+
     }
 }
