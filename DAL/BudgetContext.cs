@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL.Models;
+using DAL.Seeds;
 
 namespace DAL
 {
@@ -30,7 +31,10 @@ namespace DAL
             //minst 2 siffror minst 2 stora bokstäver minst 1 special tecken.
             modelBuilder.Entity<User>().Property(e => e.Email).HasMaxLength(255);
             #endregion
-            
+
+            #region(Seeds)
+            UserSeeder.Seed(modelBuilder);
+            #endregion
 
         }
 

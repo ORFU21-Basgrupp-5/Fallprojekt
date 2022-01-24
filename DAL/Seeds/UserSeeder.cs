@@ -15,7 +15,7 @@ namespace DAL.Seeds
             modelBuilder.Entity<User>().HasData(
                 new
                 {
-                    ID = 1,
+                    Id = 1,
                     UserName = "TestKonto1",
                     Password = "admin",
                     Email = "Test@test.nu"
