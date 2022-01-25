@@ -1,8 +1,11 @@
-﻿using System;
+﻿using DAL;
+using DAL.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace SERVICES
 {
@@ -19,6 +22,34 @@ namespace SERVICES
                 }
                 return _instance;
             }
+        }
+
+        public void InputExpenses(int saldo, int accountId, string description)
+        {
+            
+            
+            using (var context = new BudgetContext())
+            {
+                var expense = context.Expenses;
+                var newExpense = new Expense()
+                {
+                    ExpenseDate = DateTime.Now,
+                    ExpenseDescription = description,
+                    AccountId = accountId,
+                    ExpenseBalanceChange = saldo
+                };
+                expense.Add(newExpense);
+
+                 
+                var changed = context.Accounts.First(a => a.AccountId == accountId);
+                changed.Balance =  changed.Balance - saldo;    
+               
+                context.SaveChanges();
+
+                
+            }
+
+            return;
         }
     }
 }

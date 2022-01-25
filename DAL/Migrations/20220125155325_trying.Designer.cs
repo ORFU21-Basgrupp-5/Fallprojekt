@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(BudgetContext))]
-    [Migration("20220124140608_testdata_account")]
-    partial class testdata_account
+    [Migration("20220125155325_trying")]
+    partial class trying
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
