@@ -20,7 +20,7 @@ namespace DAL.Seeds
                     Name = "Lönekonto",
                     Balance = 0,
                 }
-                );
+              );
         }
     }
 }

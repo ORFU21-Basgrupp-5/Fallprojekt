@@ -40,8 +40,10 @@ namespace DAL
 
             #region(Seeds)
             UserSeeder.Seed(modelBuilder);
-            #endregion
             AccountSeed.Seed(modelBuilder);
+            ExpenseSeed.Seed(modelBuilder);
+            IncomeSeed.Seed(modelBuilder);
+            #endregion
         }
 
     }
