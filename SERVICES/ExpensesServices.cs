@@ -26,8 +26,6 @@ namespace SERVICES
 
         public void InputExpenses(int saldo, int accountId, string description)
         {
-            
-            
             using (var context = new BudgetContext())
             {
                 var expense = context.Expenses;
@@ -45,11 +43,17 @@ namespace SERVICES
                 changed.Balance =  changed.Balance - saldo;    
                
                 context.SaveChanges();
-
-                
             }
-
             return;
+        }
+
+        public List<Expense> ListAllExpenses()
+        {
+            using (var context = new BudgetContext())
+            {
+                return context.Expenses.ToList()
+                    ;
+            }
         }
     }
 }

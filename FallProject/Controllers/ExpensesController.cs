@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using API.DTO;
+using DAL.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SERVICES;
 
@@ -8,7 +10,32 @@ namespace API.Controllers
     [ApiController]
     public class ExpensesController : ControllerBase
     {
-        //[HttpGet]
+        [HttpGet("/ListExpenses")]
+        //public List<Expense> ListExpenses()
+        //{
+        //    var service = new ExpensesServices();
+        //    return service.ListAllExpenses();
+        //}
+
+        public List<ExpenseDTO> List()
+        {
+            var service = new ExpensesServices();
+            var result = new List<ExpenseDTO>();
+            foreach (var expenses in service.ListAllExpenses())
+            {
+                result.Add(
+                    new ExpenseDTO()
+                    {
+                        ExpenseId = expenses.ExpenseId,
+                        ExpenseDate = expenses.ExpenseDate,
+                        ExpenseDescription = expenses.ExpenseDescription,
+                        ExpenseBalanceChange = expenses.ExpenseBalanceChange,
+                        AccountId = expenses.AccountId,
+                    }
+                    );
+            }
+            return result;
+        }
 
         //[HttpPost]
 
@@ -18,7 +45,7 @@ namespace API.Controllers
             ExpensesServices.Instance.InputExpenses(saldo, AccountId, description);
             return;
         }
-              
+
         //[HttpDelete]
     }
 }
