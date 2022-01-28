@@ -13,11 +13,21 @@ namespace API.Controllers
         //[HttpPost]
 
         [HttpPut]
-        public void AddIncome(int saldo, int AccountId, string description)
+        [Route("AddIncome")]
+        public IActionResult AddIncome(int saldo, int AccountId, string description)
         {
-            IncomeServices.Instance.InputIncome(saldo, AccountId, description);
-            return;
-        }
+            try
+            {
+                IncomeServices.Instance.InputIncome(saldo, AccountId, description);
+                return Ok();
+            }
+            catch (Exception)
+            {
+
+                return BadRequest();
+            }
+
+        }S
 
         //[HttpDelete]
 

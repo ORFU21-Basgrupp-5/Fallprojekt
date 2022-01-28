@@ -34,10 +34,20 @@ namespace API.Controllers
         //[HttpPost]
 
         [HttpPut]
-        public void AddExpense(int saldo, int AccountId, string description)
+        [Route("AddExpense")]
+        public IActionResult AddExpense(int saldo, int AccountId, string description)
         {
-            ExpensesServices.Instance.InputExpenses(saldo, AccountId, description);
-            return;
+            try
+            {
+                ExpensesServices.Instance.InputExpenses(saldo, AccountId, description);
+                return Ok();
+            }
+            catch (Exception)
+            {
+
+                return BadRequest();
+            }
+
         }
 
         //[HttpDelete]
