@@ -11,12 +11,6 @@ namespace API.Controllers
     public class ExpensesController : ControllerBase
     {
         [HttpGet("/ListExpenses")]
-        //public List<Expense> ListExpenses()
-        //{
-        //    var service = new ExpensesServices();
-        //    return service.ListAllExpenses();
-        //}
-
         public List<ExpenseDTO> List()
         {
             var service = new ExpensesServices();
