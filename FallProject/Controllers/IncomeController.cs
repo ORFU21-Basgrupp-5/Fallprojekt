@@ -27,7 +27,7 @@ namespace API.Controllers
                 return BadRequest();
             }
 
-        }S
+        }
 
         //[HttpDelete]
 

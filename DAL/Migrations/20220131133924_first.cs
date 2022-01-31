@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DAL.Migrations
 {
-    public partial class trying : Migration
+    public partial class first : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -90,7 +90,27 @@ namespace DAL.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Email", "Password", "UserName" },
-                values: new object[] { 1, "Test@test.nu", "admin", "TestKonto1" });
+                values: new object[] { 1, "Test@test.se", "admin", "TestKonto1" });
+
+            migrationBuilder.InsertData(
+                table: "Expenses",
+                columns: new[] { "ExpenseId", "AccountId", "ExpenseBalanceChange", "ExpenseDate", "ExpenseDescription" },
+                values: new object[,]
+                {
+                    { 1, 1, 2200, new DateTime(2022, 1, 31, 14, 39, 24, 461, DateTimeKind.Local).AddTicks(5305), "Laga bil" },
+                    { 2, 1, 500, new DateTime(2022, 1, 31, 14, 39, 24, 461, DateTimeKind.Local).AddTicks(5339), "Kläder" },
+                    { 3, 1, 300, new DateTime(2022, 1, 31, 14, 39, 24, 461, DateTimeKind.Local).AddTicks(5341), "Mat" },
+                    { 4, 1, 400, new DateTime(2022, 1, 31, 14, 39, 24, 461, DateTimeKind.Local).AddTicks(5343), "Spel" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Incomes",
+                columns: new[] { "IncomeId", "AccountId", "IncomeBalanceChange", "IncomeDate", "IncomeDescription" },
+                values: new object[,]
+                {
+                    { 1, 1, 20000, new DateTime(2022, 1, 31, 0, 0, 0, 0, DateTimeKind.Local), "Lön" },
+                    { 2, 1, 8, new DateTime(2022, 1, 31, 0, 0, 0, 0, DateTimeKind.Local), "Skatteåterbäring" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Expenses_AccountId",
@@ -101,6 +121,12 @@ namespace DAL.Migrations
                 name: "IX_Incomes_AccountId",
                 table: "Incomes",
                 column: "AccountId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_UserName",
+                table: "Users",
+                column: "UserName",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
