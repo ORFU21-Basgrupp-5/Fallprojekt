@@ -14,11 +14,20 @@ namespace API.Controllers
 
         [HttpPut]
         [Route("AddIncome")]
-        public IActionResult AddIncome(int saldo, int AccountId, string description)
+        public IActionResult AddIncome(int saldo, int AccountId, string description, string date)
         {
             try
             {
-                IncomeServices.Instance.InputIncome(saldo, AccountId, description);
+                DateTime.Parse(date);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest("Invalid Date-format");
+            }
+            try
+            {
+                IncomeServices.Instance.InputIncome(saldo, AccountId, description, date);
                 return Ok();
             }
             catch (Exception)

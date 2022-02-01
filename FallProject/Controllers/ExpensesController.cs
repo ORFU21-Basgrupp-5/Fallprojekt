@@ -36,11 +36,20 @@ namespace API.Controllers
 
         [HttpPut]
         [Route("AddExpense")]
-        public IActionResult AddExpense(int saldo, int AccountId, string description)
+        public IActionResult AddExpense(int saldo, int AccountId, string description, string date)
         {
             try
             {
-                ExpensesServices.Instance.InputExpenses(saldo, AccountId, description);
+                DateTime.Parse(date);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest("Invalid Date-format");
+            }
+            try
+            {
+                ExpensesServices.Instance.InputExpenses(saldo, AccountId, description,date);
                 return Ok();
             }
             catch (Exception)

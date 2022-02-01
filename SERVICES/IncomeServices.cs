@@ -23,7 +23,7 @@ namespace SERVICES
             }
         }
 
-        public void InputIncome(int saldo, int accountId, string description)
+        public void InputIncome(int saldo, int accountId, string description,string date)
         {
 
 
@@ -32,7 +32,7 @@ namespace SERVICES
                 var income = context.Incomes;
                 var newIncome = new Income()
                 {
-                    IncomeDate = DateTime.Now,
+                    IncomeDate = DateTime.Parse(date),
                     IncomeDescription = description,
                     AccountId = accountId,
                     IncomeBalanceChange = saldo
