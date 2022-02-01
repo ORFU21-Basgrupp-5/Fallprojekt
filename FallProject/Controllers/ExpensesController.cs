@@ -6,12 +6,13 @@ using SERVICES;
 
 namespace API.Controllers
 {
+
     [Route("Expenses")]
     [ApiController]
     public class ExpensesController : ControllerBase
     {
         [HttpGet("/ListExpenses")]
-        public List<ExpenseDTO> List()
+        public IActionResult List()
         {
             var service = new ExpensesServices();
             var result = new List<ExpenseDTO>();
@@ -28,7 +29,7 @@ namespace API.Controllers
                     }
                     );
             }
-            return result;
+            return Ok(result);
         }
 
         //[HttpPost]
