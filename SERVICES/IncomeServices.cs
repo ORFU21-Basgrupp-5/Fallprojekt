@@ -44,8 +44,6 @@ namespace SERVICES
                 changed.Balance = changed.Balance + saldo;
 
                 context.SaveChanges();
-
-
             }
 
             return;

@@ -21,11 +21,9 @@ namespace API.Controllers
                 result.Add(
                     new ExpenseDTO()
                     {
-                        ExpenseId = expenses.ExpenseId,
                         ExpenseDate = expenses.ExpenseDate,
                         ExpenseDescription = expenses.ExpenseDescription,
                         ExpenseBalanceChange = expenses.ExpenseBalanceChange,
-                        AccountId = expenses.AccountId,
                     }
                     );
             }
