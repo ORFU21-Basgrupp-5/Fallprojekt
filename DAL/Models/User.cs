@@ -13,6 +13,7 @@ namespace DAL.Models
         public string Password { get; set; }
         public string Email { get; set; }
 
+        public virtual Account? Account { get; set; }
         //for when we the Account class is made
         //public Account myAccount { get; set; }
 

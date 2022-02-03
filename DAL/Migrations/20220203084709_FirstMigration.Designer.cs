@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(BudgetContext))]
-    [Migration("20220131133924_first")]
-    partial class first
+    [Migration("20220203084709_FirstMigration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -85,7 +85,7 @@ namespace DAL.Migrations
                             ExpenseId = 1,
                             AccountId = 1,
                             ExpenseBalanceChange = 2200,
-                            ExpenseDate = new DateTime(2022, 1, 31, 14, 39, 24, 461, DateTimeKind.Local).AddTicks(5305),
+                            ExpenseDate = new DateTime(2022, 2, 3, 9, 47, 9, 341, DateTimeKind.Local).AddTicks(6193),
                             ExpenseDescription = "Laga bil"
                         },
                         new
@@ -93,7 +93,7 @@ namespace DAL.Migrations
                             ExpenseId = 2,
                             AccountId = 1,
                             ExpenseBalanceChange = 500,
-                            ExpenseDate = new DateTime(2022, 1, 31, 14, 39, 24, 461, DateTimeKind.Local).AddTicks(5339),
+                            ExpenseDate = new DateTime(2022, 2, 3, 9, 47, 9, 341, DateTimeKind.Local).AddTicks(6225),
                             ExpenseDescription = "Kläder"
                         },
                         new
@@ -101,7 +101,7 @@ namespace DAL.Migrations
                             ExpenseId = 3,
                             AccountId = 1,
                             ExpenseBalanceChange = 300,
-                            ExpenseDate = new DateTime(2022, 1, 31, 14, 39, 24, 461, DateTimeKind.Local).AddTicks(5341),
+                            ExpenseDate = new DateTime(2022, 2, 3, 9, 47, 9, 341, DateTimeKind.Local).AddTicks(6227),
                             ExpenseDescription = "Mat"
                         },
                         new
@@ -109,7 +109,7 @@ namespace DAL.Migrations
                             ExpenseId = 4,
                             AccountId = 1,
                             ExpenseBalanceChange = 400,
-                            ExpenseDate = new DateTime(2022, 1, 31, 14, 39, 24, 461, DateTimeKind.Local).AddTicks(5343),
+                            ExpenseDate = new DateTime(2022, 2, 3, 9, 47, 9, 341, DateTimeKind.Local).AddTicks(6228),
                             ExpenseDescription = "Spel"
                         });
                 });
@@ -147,7 +147,7 @@ namespace DAL.Migrations
                             IncomeId = 1,
                             AccountId = 1,
                             IncomeBalanceChange = 20000,
-                            IncomeDate = new DateTime(2022, 1, 31, 0, 0, 0, 0, DateTimeKind.Local),
+                            IncomeDate = new DateTime(2022, 2, 3, 0, 0, 0, 0, DateTimeKind.Local),
                             IncomeDescription = "Lön"
                         },
                         new
@@ -155,7 +155,7 @@ namespace DAL.Migrations
                             IncomeId = 2,
                             AccountId = 1,
                             IncomeBalanceChange = 8,
-                            IncomeDate = new DateTime(2022, 1, 31, 0, 0, 0, 0, DateTimeKind.Local),
+                            IncomeDate = new DateTime(2022, 2, 3, 0, 0, 0, 0, DateTimeKind.Local),
                             IncomeDescription = "Skatteåterbäring"
                         });
                 });
@@ -167,6 +167,9 @@ namespace DAL.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("AccountId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -184,6 +187,8 @@ namespace DAL.Migrations
                         .HasColumnType("nvarchar(25)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
 
                     b.HasIndex("UserName")
                         .IsUnique();
@@ -218,6 +223,15 @@ namespace DAL.Migrations
                         .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Account");
+                });
+
+            modelBuilder.Entity("DAL.Models.User", b =>
+                {
+                    b.HasOne("DAL.Models.Account", "Account")
+                        .WithMany()
+                        .HasForeignKey("AccountId");
 
                     b.Navigation("Account");
                 });
