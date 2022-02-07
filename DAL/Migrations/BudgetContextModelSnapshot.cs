@@ -83,7 +83,7 @@ namespace DAL.Migrations
                             ExpenseId = 1,
                             AccountId = 1,
                             ExpenseBalanceChange = 2200,
-                            ExpenseDate = new DateTime(2022, 2, 3, 9, 47, 9, 341, DateTimeKind.Local).AddTicks(6193),
+                            ExpenseDate = new DateTime(2022, 2, 7, 10, 9, 26, 871, DateTimeKind.Local).AddTicks(3456),
                             ExpenseDescription = "Laga bil"
                         },
                         new
@@ -91,7 +91,7 @@ namespace DAL.Migrations
                             ExpenseId = 2,
                             AccountId = 1,
                             ExpenseBalanceChange = 500,
-                            ExpenseDate = new DateTime(2022, 2, 3, 9, 47, 9, 341, DateTimeKind.Local).AddTicks(6225),
+                            ExpenseDate = new DateTime(2022, 2, 7, 10, 9, 26, 871, DateTimeKind.Local).AddTicks(3528),
                             ExpenseDescription = "Kläder"
                         },
                         new
@@ -99,7 +99,7 @@ namespace DAL.Migrations
                             ExpenseId = 3,
                             AccountId = 1,
                             ExpenseBalanceChange = 300,
-                            ExpenseDate = new DateTime(2022, 2, 3, 9, 47, 9, 341, DateTimeKind.Local).AddTicks(6227),
+                            ExpenseDate = new DateTime(2022, 2, 7, 10, 9, 26, 871, DateTimeKind.Local).AddTicks(3535),
                             ExpenseDescription = "Mat"
                         },
                         new
@@ -107,7 +107,7 @@ namespace DAL.Migrations
                             ExpenseId = 4,
                             AccountId = 1,
                             ExpenseBalanceChange = 400,
-                            ExpenseDate = new DateTime(2022, 2, 3, 9, 47, 9, 341, DateTimeKind.Local).AddTicks(6228),
+                            ExpenseDate = new DateTime(2022, 2, 7, 10, 9, 26, 871, DateTimeKind.Local).AddTicks(3540),
                             ExpenseDescription = "Spel"
                         });
                 });
@@ -145,7 +145,7 @@ namespace DAL.Migrations
                             IncomeId = 1,
                             AccountId = 1,
                             IncomeBalanceChange = 20000,
-                            IncomeDate = new DateTime(2022, 2, 3, 0, 0, 0, 0, DateTimeKind.Local),
+                            IncomeDate = new DateTime(2022, 2, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IncomeDescription = "Lön"
                         },
                         new
@@ -153,7 +153,7 @@ namespace DAL.Migrations
                             IncomeId = 2,
                             AccountId = 1,
                             IncomeBalanceChange = 8,
-                            IncomeDate = new DateTime(2022, 2, 3, 0, 0, 0, 0, DateTimeKind.Local),
+                            IncomeDate = new DateTime(2022, 2, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IncomeDescription = "Skatteåterbäring"
                         });
                 });
@@ -197,6 +197,7 @@ namespace DAL.Migrations
                         new
                         {
                             Id = 1,
+                            AccountId = 1,
                             Email = "Test@test.se",
                             Password = "admin",
                             UserName = "TestKonto1"
