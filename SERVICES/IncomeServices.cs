@@ -23,7 +23,7 @@ namespace SERVICES
             }
         }
 
-        public void InputIncome(int saldo, int accountId, string description,string date)
+        public void InputIncome(int saldo, int accountId, string description,string date, CategoryIncome category)
         {
 
 
@@ -35,7 +35,9 @@ namespace SERVICES
                     IncomeDate = DateTime.Parse(date),
                     IncomeDescription = description,
                     AccountId = accountId,
-                    IncomeBalanceChange = saldo
+                    IncomeBalanceChange = saldo,
+                    CategoryInc = category
+                    
                 };
                 income.Add(newIncome);
 
