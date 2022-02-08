@@ -18,7 +18,8 @@ namespace DAL.Seeds
                     Id = 1,
                     UserName = "TestKonto1",
                     Password = "admin",
-                    Email = "Test@test.se"
+                    Email = "Test@test.se",
+                    AccountId = 1
 
                 });
         }

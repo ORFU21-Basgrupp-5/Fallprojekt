@@ -45,10 +45,18 @@ namespace SERVICES
             {
                 using (var context = new BudgetContext())
                 {
+                    var account = context.Accounts;
+                    var newAccount = new Account() { Name = userName + "'s konto" };
+                    
+                    int id = newAccount.AccountId;
                     var user = context.Users;
-                    var newUser = new User() { UserName = userName, Password = password, Email = mail };
+                    var newUser = new User() { UserName = userName, Password = password, Email = mail, Account = newAccount };
+                    
+                    account.Add(newAccount);
+                    context.SaveChanges();
                     user.Add(newUser);
                     context.SaveChanges();
+                    
                 }
                 return true;
             }

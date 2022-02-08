@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DAL.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class connected_account_to_user_with_registration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -94,19 +94,14 @@ namespace DAL.Migrations
                 values: new object[] { 1, 0, "Lönekonto" });
 
             migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "AccountId", "Email", "Password", "UserName" },
-                values: new object[] { 1, null, "Test@test.se", "admin", "TestKonto1" });
-
-            migrationBuilder.InsertData(
                 table: "Expenses",
                 columns: new[] { "ExpenseId", "AccountId", "ExpenseBalanceChange", "ExpenseDate", "ExpenseDescription" },
                 values: new object[,]
                 {
-                    { 1, 1, 2200, new DateTime(2022, 2, 3, 9, 47, 9, 341, DateTimeKind.Local).AddTicks(6193), "Laga bil" },
-                    { 2, 1, 500, new DateTime(2022, 2, 3, 9, 47, 9, 341, DateTimeKind.Local).AddTicks(6225), "Kläder" },
-                    { 3, 1, 300, new DateTime(2022, 2, 3, 9, 47, 9, 341, DateTimeKind.Local).AddTicks(6227), "Mat" },
-                    { 4, 1, 400, new DateTime(2022, 2, 3, 9, 47, 9, 341, DateTimeKind.Local).AddTicks(6228), "Spel" }
+                    { 1, 1, 2200, new DateTime(2022, 2, 7, 10, 9, 26, 871, DateTimeKind.Local).AddTicks(3456), "Laga bil" },
+                    { 2, 1, 500, new DateTime(2022, 2, 7, 10, 9, 26, 871, DateTimeKind.Local).AddTicks(3528), "Kläder" },
+                    { 3, 1, 300, new DateTime(2022, 2, 7, 10, 9, 26, 871, DateTimeKind.Local).AddTicks(3535), "Mat" },
+                    { 4, 1, 400, new DateTime(2022, 2, 7, 10, 9, 26, 871, DateTimeKind.Local).AddTicks(3540), "Spel" }
                 });
 
             migrationBuilder.InsertData(
@@ -114,9 +109,14 @@ namespace DAL.Migrations
                 columns: new[] { "IncomeId", "AccountId", "IncomeBalanceChange", "IncomeDate", "IncomeDescription" },
                 values: new object[,]
                 {
-                    { 1, 1, 20000, new DateTime(2022, 2, 3, 0, 0, 0, 0, DateTimeKind.Local), "Lön" },
-                    { 2, 1, 8, new DateTime(2022, 2, 3, 0, 0, 0, 0, DateTimeKind.Local), "Skatteåterbäring" }
+                    { 1, 1, 20000, new DateTime(2022, 2, 7, 0, 0, 0, 0, DateTimeKind.Local), "Lön" },
+                    { 2, 1, 8, new DateTime(2022, 2, 7, 0, 0, 0, 0, DateTimeKind.Local), "Skatteåterbäring" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "AccountId", "Email", "Password", "UserName" },
+                values: new object[] { 1, 1, "Test@test.se", "admin", "TestKonto1" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Expenses_AccountId",
