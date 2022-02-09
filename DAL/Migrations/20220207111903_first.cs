@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DAL.Migrations
 {
-    public partial class connected_account_to_user_with_registration : Migration
+    public partial class first : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -74,7 +74,7 @@ namespace DAL.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserName = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     AccountId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -98,10 +98,10 @@ namespace DAL.Migrations
                 columns: new[] { "ExpenseId", "AccountId", "ExpenseBalanceChange", "ExpenseDate", "ExpenseDescription" },
                 values: new object[,]
                 {
-                    { 1, 1, 2200, new DateTime(2022, 2, 7, 10, 9, 26, 871, DateTimeKind.Local).AddTicks(3456), "Laga bil" },
-                    { 2, 1, 500, new DateTime(2022, 2, 7, 10, 9, 26, 871, DateTimeKind.Local).AddTicks(3528), "Kläder" },
-                    { 3, 1, 300, new DateTime(2022, 2, 7, 10, 9, 26, 871, DateTimeKind.Local).AddTicks(3535), "Mat" },
-                    { 4, 1, 400, new DateTime(2022, 2, 7, 10, 9, 26, 871, DateTimeKind.Local).AddTicks(3540), "Spel" }
+                    { 1, 1, 2200, new DateTime(2022, 2, 7, 12, 19, 3, 739, DateTimeKind.Local).AddTicks(5995), "Laga bil" },
+                    { 2, 1, 500, new DateTime(2022, 2, 7, 12, 19, 3, 739, DateTimeKind.Local).AddTicks(6031), "Kläder" },
+                    { 3, 1, 300, new DateTime(2022, 2, 7, 12, 19, 3, 739, DateTimeKind.Local).AddTicks(6033), "Mat" },
+                    { 4, 1, 400, new DateTime(2022, 2, 7, 12, 19, 3, 739, DateTimeKind.Local).AddTicks(6034), "Spel" }
                 });
 
             migrationBuilder.InsertData(
@@ -116,7 +116,7 @@ namespace DAL.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "AccountId", "Email", "Password", "UserName" },
-                values: new object[] { 1, 1, "Test@test.se", "admin", "TestKonto1" });
+                values: new object[] { 1, 1, "Test@test.se", "rm/sAiqLgg4nwxJ20sht7IuoLJESlJ54I6QksDKmiQk=@jB1fjqC/s+7s+frCkBnQnw==", "TestKonto1" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Expenses_AccountId",

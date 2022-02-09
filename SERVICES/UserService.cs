@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace SERVICES
 {
@@ -31,13 +33,50 @@ namespace SERVICES
                 var users = context.Users;
                 foreach(var user in users)
                 {
-                    if(user.UserName == userName && user.Password == passWord)
+                    if(user.UserName == userName)
                     {
-                        return true;
+                        if (VerifyPassword(passWord, user.Password))
+                        {
+                            return true;
+                        }
+                        
                     }
                 }
             }
             return false;
+        }
+        private bool VerifyPassword(string userEnteredPassword, string dbPasswordHash)
+        {
+            string salt = dbPasswordHash.Split('@')[1];
+            string hashedPassword = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                password: userEnteredPassword,
+                salt: System.Convert.FromBase64String(salt),
+                prf: KeyDerivationPrf.HMACSHA256,
+                iterationCount: 13000,
+                numBytesRequested: 256 / 8));
+
+            return dbPasswordHash == (hashedPassword + "@" + salt);
+
+        }
+        private string HashPassword(string password)
+        {   
+            byte[] salt = new byte[128 / 8];
+
+            using var rng = RandomNumberGenerator.Create();
+
+            rng.GetNonZeroBytes(salt);
+
+            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+            password: password,
+            salt: salt,
+            prf: KeyDerivationPrf.HMACSHA256,
+            iterationCount: 13000,
+            numBytesRequested: 256 / 8));
+            hashed = hashed + "@" + Convert.ToBase64String(salt);
+
+            //Console.WriteLine(hashed);
+
+            return hashed;
         }
         public bool RegisterNewAccount(string userName,string password,string mail)
         {
@@ -50,7 +89,7 @@ namespace SERVICES
                     
                     int id = newAccount.AccountId;
                     var user = context.Users;
-                    var newUser = new User() { UserName = userName, Password = password, Email = mail, Account = newAccount };
+                    var newUser = new User() { UserName = userName, Password = HashPassword(password), Email = mail, Account = newAccount };
                     
                     account.Add(newAccount);
                     context.SaveChanges();
