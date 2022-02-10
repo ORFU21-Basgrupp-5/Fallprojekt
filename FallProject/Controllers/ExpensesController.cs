@@ -50,7 +50,7 @@ namespace API.Controllers
                 ExpensesServices.Instance.InputExpenses(saldo, AccountId, description,date, category);
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 return BadRequest();

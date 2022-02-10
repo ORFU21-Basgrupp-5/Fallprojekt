@@ -12,10 +12,11 @@ namespace DAL.Models
         public DateTime ExpenseDate { get; set; }
         public string ExpenseDescription { get; set; }
         public int ExpenseBalanceChange { get; set; }
-        public CategoryExpense CategoryExp { get; set; }
+       
 
         //Navigation Properties
         public int AccountId { get; set; }
         public virtual Account Account { get; set; }
+        public CategoryExpense CategoryExp { get; set; }
     }
 }
