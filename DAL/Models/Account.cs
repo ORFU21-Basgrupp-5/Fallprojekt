@@ -15,5 +15,6 @@ namespace DAL.Models
         //Navigation Properties
         public virtual List<Income> Incomes  { get; set; }
         public virtual List<Expense> Expenses  { get; set; }
+        
     }
 }
