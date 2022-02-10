@@ -19,7 +19,8 @@ namespace DAL.Seeds
                     IncomeDate = DateTime.Today,
                     IncomeDescription = "Lön",
                     IncomeBalanceChange = 20000,
-                    AccountId = 1
+                    AccountId = 1,
+                    Id = 1
                 },
                 new Income
                 {
@@ -27,7 +28,8 @@ namespace DAL.Seeds
                     IncomeDate = DateTime.Today,
                     IncomeDescription = "Skatteåterbäring",
                     IncomeBalanceChange = 8,
-                    AccountId = 1
+                    AccountId = 1,
+                    Id = 1
                 });
         }
     }

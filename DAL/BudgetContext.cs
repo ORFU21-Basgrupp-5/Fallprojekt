@@ -29,6 +29,18 @@ namespace DAL
             modelBuilder.Entity<Account>().HasKey(x => x.AccountId);
             modelBuilder.Entity<Expense>().HasKey(x => x.ExpenseId);
             modelBuilder.Entity<Income>().HasKey(x => x.IncomeId);
+
+            //modelBuilder.Entity<Expense>()
+            //    .HasOne(x => x.User)
+            //    .WithMany(x => x.UserExpenses)
+            //    .HasForeignKey(x => x.Id);
+
+            //modelBuilder.Entity<Income>()
+            //    .HasOne(x => x.User)
+            //    .WithMany(x => x.UserIncomes)
+            //    .HasForeignKey(x => x.Id);
+            
+
             #endregion
 
             #region(Propertys)

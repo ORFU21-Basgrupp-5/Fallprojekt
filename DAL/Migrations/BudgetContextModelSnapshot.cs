@@ -71,9 +71,14 @@ namespace DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
                     b.HasKey("ExpenseId");
 
                     b.HasIndex("AccountId");
+
+                    b.HasIndex("Id");
 
                     b.ToTable("Expenses");
 
@@ -83,32 +88,36 @@ namespace DAL.Migrations
                             ExpenseId = 1,
                             AccountId = 1,
                             ExpenseBalanceChange = 2200,
-                            ExpenseDate = new DateTime(2022, 2, 7, 12, 19, 3, 739, DateTimeKind.Local).AddTicks(5995),
-                            ExpenseDescription = "Laga bil"
+                            ExpenseDate = new DateTime(2022, 2, 10, 15, 7, 27, 473, DateTimeKind.Local).AddTicks(9872),
+                            ExpenseDescription = "Laga bil",
+                            Id = 1
                         },
                         new
                         {
                             ExpenseId = 2,
                             AccountId = 1,
                             ExpenseBalanceChange = 500,
-                            ExpenseDate = new DateTime(2022, 2, 7, 12, 19, 3, 739, DateTimeKind.Local).AddTicks(6031),
-                            ExpenseDescription = "Kläder"
+                            ExpenseDate = new DateTime(2022, 2, 10, 15, 7, 27, 473, DateTimeKind.Local).AddTicks(9912),
+                            ExpenseDescription = "Kläder",
+                            Id = 1
                         },
                         new
                         {
                             ExpenseId = 3,
                             AccountId = 1,
                             ExpenseBalanceChange = 300,
-                            ExpenseDate = new DateTime(2022, 2, 7, 12, 19, 3, 739, DateTimeKind.Local).AddTicks(6033),
-                            ExpenseDescription = "Mat"
+                            ExpenseDate = new DateTime(2022, 2, 10, 15, 7, 27, 473, DateTimeKind.Local).AddTicks(9915),
+                            ExpenseDescription = "Mat",
+                            Id = 1
                         },
                         new
                         {
                             ExpenseId = 4,
                             AccountId = 1,
                             ExpenseBalanceChange = 400,
-                            ExpenseDate = new DateTime(2022, 2, 7, 12, 19, 3, 739, DateTimeKind.Local).AddTicks(6034),
-                            ExpenseDescription = "Spel"
+                            ExpenseDate = new DateTime(2022, 2, 10, 15, 7, 27, 473, DateTimeKind.Local).AddTicks(9919),
+                            ExpenseDescription = "Spel",
+                            Id = 1
                         });
                 });
 
@@ -121,6 +130,9 @@ namespace DAL.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IncomeId"), 1L, 1);
 
                     b.Property<int>("AccountId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
                     b.Property<int>("IncomeBalanceChange")
@@ -137,6 +149,8 @@ namespace DAL.Migrations
 
                     b.HasIndex("AccountId");
 
+                    b.HasIndex("Id");
+
                     b.ToTable("Incomes");
 
                     b.HasData(
@@ -144,16 +158,18 @@ namespace DAL.Migrations
                         {
                             IncomeId = 1,
                             AccountId = 1,
+                            Id = 1,
                             IncomeBalanceChange = 20000,
-                            IncomeDate = new DateTime(2022, 2, 7, 0, 0, 0, 0, DateTimeKind.Local),
+                            IncomeDate = new DateTime(2022, 2, 10, 0, 0, 0, 0, DateTimeKind.Local),
                             IncomeDescription = "Lön"
                         },
                         new
                         {
                             IncomeId = 2,
                             AccountId = 1,
+                            Id = 1,
                             IncomeBalanceChange = 8,
-                            IncomeDate = new DateTime(2022, 2, 7, 0, 0, 0, 0, DateTimeKind.Local),
+                            IncomeDate = new DateTime(2022, 2, 10, 0, 0, 0, 0, DateTimeKind.Local),
                             IncomeDescription = "Skatteåterbäring"
                         });
                 });
@@ -212,7 +228,15 @@ namespace DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("DAL.Models.User", "User")
+                        .WithMany("UserExpenses")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Account");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("DAL.Models.Income", b =>
@@ -223,7 +247,15 @@ namespace DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("DAL.Models.User", "User")
+                        .WithMany("UserIncomes")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Account");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("DAL.Models.User", b =>
@@ -240,6 +272,13 @@ namespace DAL.Migrations
                     b.Navigation("Expenses");
 
                     b.Navigation("Incomes");
+                });
+
+            modelBuilder.Entity("DAL.Models.User", b =>
+                {
+                    b.Navigation("UserExpenses");
+
+                    b.Navigation("UserIncomes");
                 });
 #pragma warning restore 612, 618
         }

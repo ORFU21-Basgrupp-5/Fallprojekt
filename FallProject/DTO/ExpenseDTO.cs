@@ -6,5 +6,7 @@
         public string ExpenseDescription { get; set; }
         public int ExpenseBalanceChange { get; set; }
 
+        public int Id { get; set; }
+
     }
 }

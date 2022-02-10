@@ -14,6 +14,12 @@ namespace DAL.Models
         public string Email { get; set; }
 
         public virtual Account? Account { get; set; }
+
+        public virtual List<Expense> UserExpenses  { get; set; } = new List<Expense>();
+
+        public virtual List<Income> UserIncomes { get; set; } = new List<Income>();
+
+
         //for when we the Account class is made
         //public Account myAccount { get; set; }
 

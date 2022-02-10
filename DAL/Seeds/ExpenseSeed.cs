@@ -19,7 +19,8 @@ namespace DAL.Seeds
                     ExpenseDate = DateTime.Now,
                     ExpenseDescription = "Laga bil",
                     ExpenseBalanceChange = 2200,
-                    AccountId = 1
+                    AccountId = 1,
+                    Id = 1
                 },
                 new Expense
                 {
@@ -27,7 +28,9 @@ namespace DAL.Seeds
                     ExpenseDate = DateTime.Now,
                     ExpenseDescription = "Kläder",
                     ExpenseBalanceChange = 500,
-                    AccountId = 1
+                    AccountId = 1,
+                    Id = 1
+
                 },
                 new Expense
                 {
@@ -35,7 +38,8 @@ namespace DAL.Seeds
                     ExpenseDate = DateTime.Now,
                     ExpenseDescription = "Mat",
                     ExpenseBalanceChange = 300,
-                    AccountId = 1
+                    AccountId = 1,
+                    Id = 1
                 },
                 new Expense
                 {
@@ -43,7 +47,8 @@ namespace DAL.Seeds
                     ExpenseDate = DateTime.Now,
                     ExpenseDescription = "Spel",
                     ExpenseBalanceChange = 400,
-                    AccountId = 1
+                    AccountId = 1,
+                    Id = 1
                 }
                 );
         }

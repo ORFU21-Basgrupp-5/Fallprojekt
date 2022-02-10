@@ -24,6 +24,7 @@ namespace API.Controllers
                         ExpenseDate = expenses.ExpenseDate,
                         ExpenseDescription = expenses.ExpenseDescription,
                         ExpenseBalanceChange = expenses.ExpenseBalanceChange,
+                        Id = expenses.Id,
                     }
                     );
             }
