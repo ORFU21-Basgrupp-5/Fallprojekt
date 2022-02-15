@@ -13,7 +13,7 @@ namespace DAL.Models
         public int Balance { get; set; }
 
         //Navigation Properties
-        public virtual List<Income> Incomes  { get; set; }
-        public virtual List<Expense> Expenses  { get; set; }
+        public virtual List<Income> Incomes { get; set; }
+        public virtual List<Expense> Expenses { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using API.DTO;
 using DAL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SERVICES;
@@ -11,6 +12,7 @@ namespace API.Controllers
     [ApiController]
     public class ExpensesController : ControllerBase
     {
+
         [HttpGet("/ListExpenses")]
         public IActionResult List()
         {

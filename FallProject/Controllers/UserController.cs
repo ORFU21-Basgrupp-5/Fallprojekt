@@ -1,6 +1,9 @@
 ﻿using API.DTO;
+using API.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SERVICES;
+using Microsoft.Extensions.Configuration;
 
 namespace API.Controllers
 {
@@ -8,14 +11,45 @@ namespace API.Controllers
     [ApiController]
     public class UserController : Controller
     {
-        [HttpGet("Login")]
-        public IActionResult Login(string userName, string passWord) {
-            var result = UserService.Instance.Login(userName, passWord);
-            if(result == true)
+        private readonly ITokenService _tokenService;
+        private readonly IConfiguration _configuration;
+        public UserController(ITokenService tokenService,  IConfiguration config)
+        {
+            _tokenService = tokenService;
+            _configuration = config;
+        }
+
+
+
+        [AllowAnonymous]
+        [HttpPost("login")]
+        public IActionResult Login(UserLoginDTO userLoginDTO) {
+
+            if (string.IsNullOrEmpty(userLoginDTO.UserName) || string.IsNullOrEmpty(userLoginDTO.Password))
             {
-                return Ok(result);
+                return RedirectToAction("Error");
             }
-            return BadRequest();
+
+
+
+            var result = UserService.Instance.Login(userLoginDTO.UserName, userLoginDTO.Password);
+            if(result != "")
+            {
+                var generatedToken = _tokenService.BuildToken(_configuration["Jwt:Key"].ToString(), _configuration["Jwt:Issuer"].ToString(), result);
+                return Ok(new
+                {
+                    token = generatedToken,
+                    user = result
+                });
+            }
+            return RedirectToAction("Error");
+        }
+
+        [Authorize]
+        [HttpPost("Secret")]
+        public ActionResult SecretFunction()
+        {
+            return Ok("Alright, you are authorized user");
         }
 
         [HttpPost("register")]
