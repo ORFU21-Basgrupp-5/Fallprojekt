@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SERVICES;
 
@@ -11,7 +12,7 @@ namespace API.Controllers
         //[HttpGet]
 
         //[HttpPost]
-
+        [Authorize]
         [HttpPut]
         [Route("AddIncome")]
         public IActionResult AddIncome(int saldo, int AccountId, string description, string date)

@@ -7,12 +7,12 @@ using SERVICES;
 
 namespace API.Controllers
 {
-
+    [Authorize]
     [Route("Expenses")]
     [ApiController]
     public class ExpensesController : ControllerBase
     {
-
+        
         [HttpGet("/ListExpenses")]
         public IActionResult List()
         {
@@ -33,7 +33,7 @@ namespace API.Controllers
         }
 
         //[HttpPost]
-
+        [Authorize]
         [HttpPut]
         [Route("AddExpense")]
         public IActionResult AddExpense(int saldo, int AccountId, string description, string date)

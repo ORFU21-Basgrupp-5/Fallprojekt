@@ -52,6 +52,7 @@ namespace API.Controllers
             return Ok("Alright, you are authorized user");
         }
 
+        [AllowAnonymous]
         [HttpPost("register")]
         public IActionResult Register(UserDTO newUser)
         {

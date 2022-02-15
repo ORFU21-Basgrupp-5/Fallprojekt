@@ -83,7 +83,7 @@ namespace DAL.Migrations
                             ExpenseId = 1,
                             AccountId = 1,
                             ExpenseBalanceChange = 2200,
-                            ExpenseDate = new DateTime(2022, 2, 3, 9, 47, 9, 341, DateTimeKind.Local).AddTicks(6193),
+                            ExpenseDate = new DateTime(2022, 2, 15, 10, 34, 30, 75, DateTimeKind.Local).AddTicks(5300),
                             ExpenseDescription = "Laga bil"
                         },
                         new
@@ -91,7 +91,7 @@ namespace DAL.Migrations
                             ExpenseId = 2,
                             AccountId = 1,
                             ExpenseBalanceChange = 500,
-                            ExpenseDate = new DateTime(2022, 2, 3, 9, 47, 9, 341, DateTimeKind.Local).AddTicks(6225),
+                            ExpenseDate = new DateTime(2022, 2, 15, 10, 34, 30, 75, DateTimeKind.Local).AddTicks(5338),
                             ExpenseDescription = "Kläder"
                         },
                         new
@@ -99,7 +99,7 @@ namespace DAL.Migrations
                             ExpenseId = 3,
                             AccountId = 1,
                             ExpenseBalanceChange = 300,
-                            ExpenseDate = new DateTime(2022, 2, 3, 9, 47, 9, 341, DateTimeKind.Local).AddTicks(6227),
+                            ExpenseDate = new DateTime(2022, 2, 15, 10, 34, 30, 75, DateTimeKind.Local).AddTicks(5339),
                             ExpenseDescription = "Mat"
                         },
                         new
@@ -107,7 +107,7 @@ namespace DAL.Migrations
                             ExpenseId = 4,
                             AccountId = 1,
                             ExpenseBalanceChange = 400,
-                            ExpenseDate = new DateTime(2022, 2, 3, 9, 47, 9, 341, DateTimeKind.Local).AddTicks(6228),
+                            ExpenseDate = new DateTime(2022, 2, 15, 10, 34, 30, 75, DateTimeKind.Local).AddTicks(5341),
                             ExpenseDescription = "Spel"
                         });
                 });
@@ -145,7 +145,7 @@ namespace DAL.Migrations
                             IncomeId = 1,
                             AccountId = 1,
                             IncomeBalanceChange = 20000,
-                            IncomeDate = new DateTime(2022, 2, 3, 0, 0, 0, 0, DateTimeKind.Local),
+                            IncomeDate = new DateTime(2022, 2, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             IncomeDescription = "Lön"
                         },
                         new
@@ -153,7 +153,7 @@ namespace DAL.Migrations
                             IncomeId = 2,
                             AccountId = 1,
                             IncomeBalanceChange = 8,
-                            IncomeDate = new DateTime(2022, 2, 3, 0, 0, 0, 0, DateTimeKind.Local),
+                            IncomeDate = new DateTime(2022, 2, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             IncomeDescription = "Skatteåterbäring"
                         });
                 });
@@ -176,8 +176,8 @@ namespace DAL.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("UserName")
                         .IsRequired()
@@ -197,8 +197,9 @@ namespace DAL.Migrations
                         new
                         {
                             Id = 1,
+                            AccountId = 1,
                             Email = "Test@test.se",
-                            Password = "admin",
+                            Password = "rm/sAiqLgg4nwxJ20sht7IuoLJESlJ54I6QksDKmiQk=@jB1fjqC/s+7s+frCkBnQnw==",
                             UserName = "TestKonto1"
                         });
                 });
