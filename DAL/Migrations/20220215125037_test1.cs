@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DAL.Migrations
 {
-    public partial class JWTtest : Migration
+    public partial class test1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -98,10 +98,10 @@ namespace DAL.Migrations
                 columns: new[] { "ExpenseId", "AccountId", "ExpenseBalanceChange", "ExpenseDate", "ExpenseDescription" },
                 values: new object[,]
                 {
-                    { 1, 1, 2200, new DateTime(2022, 2, 15, 10, 34, 30, 75, DateTimeKind.Local).AddTicks(5300), "Laga bil" },
-                    { 2, 1, 500, new DateTime(2022, 2, 15, 10, 34, 30, 75, DateTimeKind.Local).AddTicks(5338), "Kläder" },
-                    { 3, 1, 300, new DateTime(2022, 2, 15, 10, 34, 30, 75, DateTimeKind.Local).AddTicks(5339), "Mat" },
-                    { 4, 1, 400, new DateTime(2022, 2, 15, 10, 34, 30, 75, DateTimeKind.Local).AddTicks(5341), "Spel" }
+                    { 1, 1, 2200, new DateTime(2022, 2, 15, 13, 50, 37, 277, DateTimeKind.Local).AddTicks(1116), "Laga bil" },
+                    { 2, 1, 500, new DateTime(2022, 2, 15, 13, 50, 37, 277, DateTimeKind.Local).AddTicks(1149), "Kläder" },
+                    { 3, 1, 300, new DateTime(2022, 2, 15, 13, 50, 37, 277, DateTimeKind.Local).AddTicks(1151), "Mat" },
+                    { 4, 1, 400, new DateTime(2022, 2, 15, 13, 50, 37, 277, DateTimeKind.Local).AddTicks(1152), "Spel" }
                 });
 
             migrationBuilder.InsertData(

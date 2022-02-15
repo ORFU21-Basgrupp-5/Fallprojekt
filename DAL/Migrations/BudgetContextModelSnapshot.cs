@@ -83,7 +83,7 @@ namespace DAL.Migrations
                             ExpenseId = 1,
                             AccountId = 1,
                             ExpenseBalanceChange = 2200,
-                            ExpenseDate = new DateTime(2022, 2, 15, 10, 34, 30, 75, DateTimeKind.Local).AddTicks(5300),
+                            ExpenseDate = new DateTime(2022, 2, 15, 13, 50, 37, 277, DateTimeKind.Local).AddTicks(1116),
                             ExpenseDescription = "Laga bil"
                         },
                         new
@@ -91,7 +91,7 @@ namespace DAL.Migrations
                             ExpenseId = 2,
                             AccountId = 1,
                             ExpenseBalanceChange = 500,
-                            ExpenseDate = new DateTime(2022, 2, 15, 10, 34, 30, 75, DateTimeKind.Local).AddTicks(5338),
+                            ExpenseDate = new DateTime(2022, 2, 15, 13, 50, 37, 277, DateTimeKind.Local).AddTicks(1149),
                             ExpenseDescription = "Kläder"
                         },
                         new
@@ -99,7 +99,7 @@ namespace DAL.Migrations
                             ExpenseId = 3,
                             AccountId = 1,
                             ExpenseBalanceChange = 300,
-                            ExpenseDate = new DateTime(2022, 2, 15, 10, 34, 30, 75, DateTimeKind.Local).AddTicks(5339),
+                            ExpenseDate = new DateTime(2022, 2, 15, 13, 50, 37, 277, DateTimeKind.Local).AddTicks(1151),
                             ExpenseDescription = "Mat"
                         },
                         new
@@ -107,7 +107,7 @@ namespace DAL.Migrations
                             ExpenseId = 4,
                             AccountId = 1,
                             ExpenseBalanceChange = 400,
-                            ExpenseDate = new DateTime(2022, 2, 15, 10, 34, 30, 75, DateTimeKind.Local).AddTicks(5341),
+                            ExpenseDate = new DateTime(2022, 2, 15, 13, 50, 37, 277, DateTimeKind.Local).AddTicks(1152),
                             ExpenseDescription = "Spel"
                         });
                 });

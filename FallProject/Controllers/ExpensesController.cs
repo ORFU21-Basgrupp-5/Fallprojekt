@@ -7,12 +7,12 @@ using SERVICES;
 
 namespace API.Controllers
 {
-    [Authorize]
+    
     [Route("Expenses")]
     [ApiController]
     public class ExpensesController : ControllerBase
     {
-        
+        [Authorize]
         [HttpGet("/ListExpenses")]
         public IActionResult List()
         {
@@ -36,7 +36,7 @@ namespace API.Controllers
         [Authorize]
         [HttpPut]
         [Route("AddExpense")]
-        public IActionResult AddExpense(int saldo, int AccountId, string description, string date)
+        public IActionResult AddExpense(int saldo, int AccountId, string description, string date, CategoryExpense category)
         {
             try
             {
@@ -49,17 +49,17 @@ namespace API.Controllers
             }
             try
             {
-                ExpensesServices.Instance.InputExpenses(saldo, AccountId, description,date);
+                //category 
+                ExpensesServices.Instance.InputExpenses(saldo, AccountId, description, date);
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 return BadRequest();
             }
 
         }
-
         //[HttpDelete]
     }
 }
