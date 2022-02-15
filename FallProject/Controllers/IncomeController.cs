@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DAL.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SERVICES;
 
@@ -14,7 +15,7 @@ namespace API.Controllers
 
         [HttpPut]
         [Route("AddIncome")]
-        public IActionResult AddIncome(int saldo, int AccountId, string description, string date)
+        public IActionResult AddIncome(int saldo, int AccountId, string description, string date, CategoryIncome category)
         {
             try
             {
@@ -27,7 +28,7 @@ namespace API.Controllers
             }
             try
             {
-                IncomeServices.Instance.InputIncome(saldo, AccountId, description, date);
+                IncomeServices.Instance.InputIncome(saldo, AccountId, description, date, category);
                 return Ok();
             }
             catch (Exception)

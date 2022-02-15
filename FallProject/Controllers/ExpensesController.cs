@@ -34,7 +34,7 @@ namespace API.Controllers
 
         [HttpPut]
         [Route("AddExpense")]
-        public IActionResult AddExpense(int saldo, int AccountId, string description, string date)
+        public IActionResult AddExpense(int saldo, int AccountId, string description, string date, CategoryExpense category)
         {
             try
             {
@@ -47,10 +47,10 @@ namespace API.Controllers
             }
             try
             {
-                ExpensesServices.Instance.InputExpenses(saldo, AccountId, description,date);
+                ExpensesServices.Instance.InputExpenses(saldo, AccountId, description,date, category);
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 return BadRequest();
