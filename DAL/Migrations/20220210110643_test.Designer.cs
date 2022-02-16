@@ -4,6 +4,7 @@ using DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(BudgetContext))]
-    partial class BudgetContextModelSnapshot : ModelSnapshot
+    [Migration("20220210110643_test")]
+    partial class test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,10 +89,7 @@ namespace DAL.Migrations
                             AccountId = 1,
                             CategoryExp = 0,
                             ExpenseBalanceChange = 2200,
-
-                            ExpenseDate = new DateTime(2022, 2, 15, 13, 50, 37, 277, DateTimeKind.Local).AddTicks(1116),
-
-
+                            ExpenseDate = new DateTime(2022, 2, 10, 12, 6, 42, 930, DateTimeKind.Local).AddTicks(7056),
                             ExpenseDescription = "Laga bil"
                         },
                         new
@@ -99,9 +98,7 @@ namespace DAL.Migrations
                             AccountId = 1,
                             CategoryExp = 0,
                             ExpenseBalanceChange = 500,
-
-                            ExpenseDate = new DateTime(2022, 2, 15, 13, 50, 37, 277, DateTimeKind.Local).AddTicks(1149),
-
+                            ExpenseDate = new DateTime(2022, 2, 10, 12, 6, 42, 930, DateTimeKind.Local).AddTicks(7099),
                             ExpenseDescription = "Kläder"
                         },
                         new
@@ -110,11 +107,7 @@ namespace DAL.Migrations
                             AccountId = 1,
                             CategoryExp = 0,
                             ExpenseBalanceChange = 300,
-
-                            ExpenseDate = new DateTime(2022, 2, 15, 13, 50, 37, 277, DateTimeKind.Local).AddTicks(1151),
-
-
-
+                            ExpenseDate = new DateTime(2022, 2, 10, 12, 6, 42, 930, DateTimeKind.Local).AddTicks(7102),
                             ExpenseDescription = "Mat"
                         },
                         new
@@ -123,9 +116,7 @@ namespace DAL.Migrations
                             AccountId = 1,
                             CategoryExp = 0,
                             ExpenseBalanceChange = 400,
-
-                            ExpenseDate = new DateTime(2022, 2, 15, 13, 50, 37, 277, DateTimeKind.Local).AddTicks(1152),
-
+                            ExpenseDate = new DateTime(2022, 2, 10, 12, 6, 42, 930, DateTimeKind.Local).AddTicks(7106),
                             ExpenseDescription = "Spel"
                         });
                 });
@@ -167,9 +158,7 @@ namespace DAL.Migrations
                             AccountId = 1,
                             CategoryInc = 0,
                             IncomeBalanceChange = 20000,
-
-                            IncomeDate = new DateTime(2022, 2, 15, 0, 0, 0, 0, DateTimeKind.Local),
-
+                            IncomeDate = new DateTime(2022, 2, 10, 0, 0, 0, 0, DateTimeKind.Local),
                             IncomeDescription = "Lön"
                         },
                         new
@@ -178,9 +167,7 @@ namespace DAL.Migrations
                             AccountId = 1,
                             CategoryInc = 0,
                             IncomeBalanceChange = 8,
-
-                            IncomeDate = new DateTime(2022, 2, 15, 0, 0, 0, 0, DateTimeKind.Local),
-
+                            IncomeDate = new DateTime(2022, 2, 10, 0, 0, 0, 0, DateTimeKind.Local),
                             IncomeDescription = "Skatteåterbäring"
                         });
                 });
@@ -193,9 +180,6 @@ namespace DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("AccountId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(255)
@@ -203,8 +187,8 @@ namespace DAL.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("UserName")
                         .IsRequired()
@@ -212,8 +196,6 @@ namespace DAL.Migrations
                         .HasColumnType("nvarchar(25)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AccountId");
 
                     b.HasIndex("UserName")
                         .IsUnique();
@@ -224,9 +206,8 @@ namespace DAL.Migrations
                         new
                         {
                             Id = 1,
-                            AccountId = 1,
                             Email = "Test@test.se",
-                            Password = "rm/sAiqLgg4nwxJ20sht7IuoLJESlJ54I6QksDKmiQk=@jB1fjqC/s+7s+frCkBnQnw==",
+                            Password = "admin",
                             UserName = "TestKonto1"
                         });
                 });
@@ -249,15 +230,6 @@ namespace DAL.Migrations
                         .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Account");
-                });
-
-            modelBuilder.Entity("DAL.Models.User", b =>
-                {
-                    b.HasOne("DAL.Models.Account", "Account")
-                        .WithMany()
-                        .HasForeignKey("AccountId");
 
                     b.Navigation("Account");
                 });

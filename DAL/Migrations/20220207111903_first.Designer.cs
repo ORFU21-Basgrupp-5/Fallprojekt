@@ -4,6 +4,7 @@ using DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(BudgetContext))]
-    partial class BudgetContextModelSnapshot : ModelSnapshot
+    [Migration("20220207111903_first")]
+    partial class first
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,9 +63,6 @@ namespace DAL.Migrations
                     b.Property<int>("AccountId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CategoryExp")
-                        .HasColumnType("int");
-
                     b.Property<int>("ExpenseBalanceChange")
                         .HasColumnType("int");
 
@@ -85,47 +84,32 @@ namespace DAL.Migrations
                         {
                             ExpenseId = 1,
                             AccountId = 1,
-                            CategoryExp = 0,
                             ExpenseBalanceChange = 2200,
-
-                            ExpenseDate = new DateTime(2022, 2, 15, 13, 50, 37, 277, DateTimeKind.Local).AddTicks(1116),
-
-
+                            ExpenseDate = new DateTime(2022, 2, 7, 12, 19, 3, 739, DateTimeKind.Local).AddTicks(5995),
                             ExpenseDescription = "Laga bil"
                         },
                         new
                         {
                             ExpenseId = 2,
                             AccountId = 1,
-                            CategoryExp = 0,
                             ExpenseBalanceChange = 500,
-
-                            ExpenseDate = new DateTime(2022, 2, 15, 13, 50, 37, 277, DateTimeKind.Local).AddTicks(1149),
-
+                            ExpenseDate = new DateTime(2022, 2, 7, 12, 19, 3, 739, DateTimeKind.Local).AddTicks(6031),
                             ExpenseDescription = "Kläder"
                         },
                         new
                         {
                             ExpenseId = 3,
                             AccountId = 1,
-                            CategoryExp = 0,
                             ExpenseBalanceChange = 300,
-
-                            ExpenseDate = new DateTime(2022, 2, 15, 13, 50, 37, 277, DateTimeKind.Local).AddTicks(1151),
-
-
-
+                            ExpenseDate = new DateTime(2022, 2, 7, 12, 19, 3, 739, DateTimeKind.Local).AddTicks(6033),
                             ExpenseDescription = "Mat"
                         },
                         new
                         {
                             ExpenseId = 4,
                             AccountId = 1,
-                            CategoryExp = 0,
                             ExpenseBalanceChange = 400,
-
-                            ExpenseDate = new DateTime(2022, 2, 15, 13, 50, 37, 277, DateTimeKind.Local).AddTicks(1152),
-
+                            ExpenseDate = new DateTime(2022, 2, 7, 12, 19, 3, 739, DateTimeKind.Local).AddTicks(6034),
                             ExpenseDescription = "Spel"
                         });
                 });
@@ -139,9 +123,6 @@ namespace DAL.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IncomeId"), 1L, 1);
 
                     b.Property<int>("AccountId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CategoryInc")
                         .HasColumnType("int");
 
                     b.Property<int>("IncomeBalanceChange")
@@ -165,22 +146,16 @@ namespace DAL.Migrations
                         {
                             IncomeId = 1,
                             AccountId = 1,
-                            CategoryInc = 0,
                             IncomeBalanceChange = 20000,
-
-                            IncomeDate = new DateTime(2022, 2, 15, 0, 0, 0, 0, DateTimeKind.Local),
-
+                            IncomeDate = new DateTime(2022, 2, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IncomeDescription = "Lön"
                         },
                         new
                         {
                             IncomeId = 2,
                             AccountId = 1,
-                            CategoryInc = 0,
                             IncomeBalanceChange = 8,
-
-                            IncomeDate = new DateTime(2022, 2, 15, 0, 0, 0, 0, DateTimeKind.Local),
-
+                            IncomeDate = new DateTime(2022, 2, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IncomeDescription = "Skatteåterbäring"
                         });
                 });

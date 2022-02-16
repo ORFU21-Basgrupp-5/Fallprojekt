@@ -1,4 +1,4 @@
-﻿using DAL;
+using DAL;
 using DAL.Models;
 using System;
 using System.Collections.Generic;
@@ -35,15 +35,19 @@ namespace SERVICES
                 var users = context.Users;
                 foreach(var user in users)
                 {
+
                     if(user.UserName == userName && VerifyPassword(passWord, user.Password))
                     {
                         return user.UserName;
+
                     }
                 }
             }
             return result;
         }
+
         public bool RegisterNewAccount(string userName, string password, string mail)
+
         {
             try
             {
@@ -52,9 +56,12 @@ namespace SERVICES
                     var account = context.Accounts;
                     var newAccount = new Account() { Name = userName + "'s konto" };
 
+
                     int id = newAccount.AccountId;
                     var user = context.Users;
                     var newUser = new User() { UserName = userName, Password = HashPassword(password), Email = mail, Account = newAccount };
+
+
 
                     account.Add(newAccount);
                     context.SaveChanges();

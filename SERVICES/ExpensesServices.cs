@@ -24,7 +24,9 @@ namespace SERVICES
             }
         }
 
-        public void InputExpenses(int saldo, int accountId, string description, string date, CategoryExpense category)
+
+        public void InputExpenses(int saldo, int accountId, string description,string date, CategoryExpense category)
+
         {
             using (var context = new BudgetContext())
             {

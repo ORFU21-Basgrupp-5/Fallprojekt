@@ -6,16 +6,13 @@ using System.Threading.Tasks;
 
 namespace DAL.Models
 {
-    public enum CategoryExpense
+    public enum CategoryIncome
     {
-        Food,
-        Car,
-        Subscriptions,
-        Clothes,
-        Treat,
+        Income,
+        CSN,
+        Shares,
+        Swish,
         Other
+
     }
-
 }
-
-

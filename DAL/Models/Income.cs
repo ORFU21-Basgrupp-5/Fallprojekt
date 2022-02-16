@@ -12,9 +12,11 @@ namespace DAL.Models
         public DateTime IncomeDate { get; set; }
         public string IncomeDescription{ get; set; }
         public int IncomeBalanceChange{ get; set; }
+        
 
         //Navigation Properties
         public int AccountId { get; set; }
         public virtual Account Account { get; set; }
+        public CategoryIncome CategoryInc { get; set; }
     }
 }
