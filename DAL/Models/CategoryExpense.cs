@@ -15,4 +15,7 @@ namespace DAL.Models
         Treat,
         Other
     }
+
 }
+
+

@@ -24,7 +24,9 @@ namespace SERVICES
             }
         }
 
+
         public void InputExpenses(int saldo, int accountId, string description,string date, CategoryExpense category)
+
         {
             using (var context = new BudgetContext())
             {
@@ -39,10 +41,10 @@ namespace SERVICES
                 };
                 expense.Add(newExpense);
 
-                 
+
                 var changed = context.Accounts.First(a => a.AccountId == accountId);
-                changed.Balance =  changed.Balance - saldo;    
-               
+                changed.Balance = changed.Balance - saldo;
+
                 context.SaveChanges();
             }
             return;

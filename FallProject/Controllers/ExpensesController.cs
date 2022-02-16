@@ -1,16 +1,18 @@
 ﻿using API.DTO;
 using DAL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SERVICES;
 
 namespace API.Controllers
 {
-
+    
     [Route("Expenses")]
     [ApiController]
     public class ExpensesController : ControllerBase
     {
+        [Authorize]
         [HttpGet("/ListExpenses")]
         public IActionResult List()
         {
@@ -31,7 +33,7 @@ namespace API.Controllers
         }
 
         //[HttpPost]
-
+        [Authorize]
         [HttpPut]
         [Route("AddExpense")]
         public IActionResult AddExpense(int saldo, int AccountId, string description, string date, CategoryExpense category)
@@ -47,7 +49,9 @@ namespace API.Controllers
             }
             try
             {
+
                 ExpensesServices.Instance.InputExpenses(saldo, AccountId, description,date, category);
+
                 return Ok();
             }
             catch (Exception ex)
@@ -57,7 +61,6 @@ namespace API.Controllers
             }
 
         }
-
         //[HttpDelete]
     }
 }

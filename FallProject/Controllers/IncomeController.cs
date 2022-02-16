@@ -1,4 +1,5 @@
-﻿using DAL.Models;
+using Microsoft.AspNetCore.Authorization;
+using DAL.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SERVICES;
@@ -12,7 +13,7 @@ namespace API.Controllers
         //[HttpGet]
 
         //[HttpPost]
-
+        [Authorize]
         [HttpPut]
         [Route("AddIncome")]
         public IActionResult AddIncome(int saldo, int AccountId, string description, string date, CategoryIncome category)
