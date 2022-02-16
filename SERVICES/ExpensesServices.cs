@@ -54,8 +54,7 @@ namespace SERVICES
         {
             using (var context = new BudgetContext())
             {
-                return context.Expenses.ToList()
-                    ;
+                return context.Expenses.ToList();
             }
         }
     }

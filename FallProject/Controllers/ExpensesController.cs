@@ -18,6 +18,12 @@ namespace API.Controllers
         {
             var service = new ExpensesServices();
             var result = new List<ExpenseDTO>();
+            string id;
+            object value;
+            ControllerContext.HttpContext.Items.TryGetValue("Username", out value);
+
+            var username = value.ToString();
+            Console.WriteLine(username);
             foreach (var expenses in service.ListAllExpenses())
             {
                 result.Add(

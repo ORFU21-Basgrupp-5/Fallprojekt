@@ -32,7 +32,8 @@ namespace DAL.Migrations
                     ExpenseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ExpenseDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ExpenseBalanceChange = table.Column<int>(type: "int", nullable: false),
-                    AccountId = table.Column<int>(type: "int", nullable: false)
+                    AccountId = table.Column<int>(type: "int", nullable: false),
+                    CategoryExp = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,7 +55,8 @@ namespace DAL.Migrations
                     IncomeDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IncomeDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IncomeBalanceChange = table.Column<int>(type: "int", nullable: false),
-                    AccountId = table.Column<int>(type: "int", nullable: false)
+                    AccountId = table.Column<int>(type: "int", nullable: false),
+                    CategoryInc = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -95,22 +97,22 @@ namespace DAL.Migrations
 
             migrationBuilder.InsertData(
                 table: "Expenses",
-                columns: new[] { "ExpenseId", "AccountId", "ExpenseBalanceChange", "ExpenseDate", "ExpenseDescription" },
+                columns: new[] { "ExpenseId", "AccountId", "CategoryExp", "ExpenseBalanceChange", "ExpenseDate", "ExpenseDescription" },
                 values: new object[,]
                 {
-                    { 1, 1, 2200, new DateTime(2022, 2, 7, 12, 19, 3, 739, DateTimeKind.Local).AddTicks(5995), "Laga bil" },
-                    { 2, 1, 500, new DateTime(2022, 2, 7, 12, 19, 3, 739, DateTimeKind.Local).AddTicks(6031), "Kläder" },
-                    { 3, 1, 300, new DateTime(2022, 2, 7, 12, 19, 3, 739, DateTimeKind.Local).AddTicks(6033), "Mat" },
-                    { 4, 1, 400, new DateTime(2022, 2, 7, 12, 19, 3, 739, DateTimeKind.Local).AddTicks(6034), "Spel" }
+                    { 1, 1, 0, 2200, new DateTime(2022, 2, 16, 14, 42, 58, 837, DateTimeKind.Local).AddTicks(4997), "Laga bil" },
+                    { 2, 1, 0, 500, new DateTime(2022, 2, 16, 14, 42, 58, 837, DateTimeKind.Local).AddTicks(5029), "Kläder" },
+                    { 3, 1, 0, 300, new DateTime(2022, 2, 16, 14, 42, 58, 837, DateTimeKind.Local).AddTicks(5031), "Mat" },
+                    { 4, 1, 0, 400, new DateTime(2022, 2, 16, 14, 42, 58, 837, DateTimeKind.Local).AddTicks(5032), "Spel" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Incomes",
-                columns: new[] { "IncomeId", "AccountId", "IncomeBalanceChange", "IncomeDate", "IncomeDescription" },
+                columns: new[] { "IncomeId", "AccountId", "CategoryInc", "IncomeBalanceChange", "IncomeDate", "IncomeDescription" },
                 values: new object[,]
                 {
-                    { 1, 1, 20000, new DateTime(2022, 2, 7, 0, 0, 0, 0, DateTimeKind.Local), "Lön" },
-                    { 2, 1, 8, new DateTime(2022, 2, 7, 0, 0, 0, 0, DateTimeKind.Local), "Skatteåterbäring" }
+                    { 1, 1, 0, 20000, new DateTime(2022, 2, 16, 0, 0, 0, 0, DateTimeKind.Local), "Lön" },
+                    { 2, 1, 0, 8, new DateTime(2022, 2, 16, 0, 0, 0, 0, DateTimeKind.Local), "Skatteåterbäring" }
                 });
 
             migrationBuilder.InsertData(

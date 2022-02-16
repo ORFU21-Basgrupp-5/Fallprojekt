@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using API.Authentication;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,7 +35,22 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 });
 
 var app = builder.Build();
+app.Use(async (context, next) =>
+{
+    // you could get from token or get from session. 
+    string token = context.Request.Headers["Authorization"];
+    if (!string.IsNullOrEmpty(token))
+    {
+        var tok = token.Replace("Bearer ", "");
+        var jwttoken = new JwtSecurityTokenHandler().ReadJwtToken(tok);
 
+        var jti = jwttoken.Claims.First(claim => claim.Type == ClaimTypes.Name).Value;
+        context.Items.Add("Username", jti);
+    }
+
+    await next();
+
+});
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
