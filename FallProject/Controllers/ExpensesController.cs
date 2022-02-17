@@ -1,21 +1,29 @@
 ﻿using API.DTO;
 using DAL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SERVICES;
 
 namespace API.Controllers
 {
-
+    
     [Route("Expenses")]
     [ApiController]
     public class ExpensesController : ControllerBase
     {
+        [Authorize]
         [HttpGet("/ListExpenses")]
         public IActionResult List()
         {
             var service = new ExpensesServices();
             var result = new List<ExpenseDTO>();
+            string id;
+            object value;
+            ControllerContext.HttpContext.Items.TryGetValue("Username", out value);
+
+            var username = value.ToString();
+            Console.WriteLine(username);
             foreach (var expenses in service.ListAllExpenses())
             {
                 result.Add(
@@ -31,10 +39,10 @@ namespace API.Controllers
         }
 
         //[HttpPost]
-
+        [Authorize]
         [HttpPut]
         [Route("AddExpense")]
-        public IActionResult AddExpense(int saldo, int AccountId, string description, string date)
+        public IActionResult AddExpense(int saldo, int AccountId, string description, string date, CategoryExpense category)
         {
             try
             {
@@ -47,17 +55,18 @@ namespace API.Controllers
             }
             try
             {
-                ExpensesServices.Instance.InputExpenses(saldo, AccountId, description,date);
+
+                ExpensesServices.Instance.InputExpenses(saldo, AccountId, description,date, category);
+
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 return BadRequest();
             }
 
         }
-
         //[HttpDelete]
     }
 }

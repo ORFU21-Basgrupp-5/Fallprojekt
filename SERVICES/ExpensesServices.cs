@@ -24,7 +24,9 @@ namespace SERVICES
             }
         }
 
-        public void InputExpenses(int saldo, int accountId, string description,string date)
+
+        public void InputExpenses(int saldo, int accountId, string description,string date, CategoryExpense category)
+
         {
             using (var context = new BudgetContext())
             {
@@ -34,14 +36,15 @@ namespace SERVICES
                     ExpenseDate = DateTime.Parse(date),
                     ExpenseDescription = description,
                     AccountId = accountId,
-                    ExpenseBalanceChange = saldo
+                    ExpenseBalanceChange = saldo,
+                    CategoryExp = category
                 };
                 expense.Add(newExpense);
 
-                 
+
                 var changed = context.Accounts.First(a => a.AccountId == accountId);
-                changed.Balance =  changed.Balance - saldo;    
-               
+                changed.Balance = changed.Balance - saldo;
+
                 context.SaveChanges();
             }
             return;
@@ -51,8 +54,7 @@ namespace SERVICES
         {
             using (var context = new BudgetContext())
             {
-                return context.Expenses.ToList()
-                    ;
+                return context.Expenses.ToList();
             }
         }
     }

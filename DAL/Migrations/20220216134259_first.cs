@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DAL.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class first : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -32,7 +32,8 @@ namespace DAL.Migrations
                     ExpenseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ExpenseDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ExpenseBalanceChange = table.Column<int>(type: "int", nullable: false),
-                    AccountId = table.Column<int>(type: "int", nullable: false)
+                    AccountId = table.Column<int>(type: "int", nullable: false),
+                    CategoryExp = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,7 +55,8 @@ namespace DAL.Migrations
                     IncomeDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IncomeDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IncomeBalanceChange = table.Column<int>(type: "int", nullable: false),
-                    AccountId = table.Column<int>(type: "int", nullable: false)
+                    AccountId = table.Column<int>(type: "int", nullable: false),
+                    CategoryInc = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -74,7 +76,7 @@ namespace DAL.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserName = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     AccountId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -94,29 +96,29 @@ namespace DAL.Migrations
                 values: new object[] { 1, 0, "Lönekonto" });
 
             migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "AccountId", "Email", "Password", "UserName" },
-                values: new object[] { 1, null, "Test@test.se", "admin", "TestKonto1" });
-
-            migrationBuilder.InsertData(
                 table: "Expenses",
-                columns: new[] { "ExpenseId", "AccountId", "ExpenseBalanceChange", "ExpenseDate", "ExpenseDescription" },
+                columns: new[] { "ExpenseId", "AccountId", "CategoryExp", "ExpenseBalanceChange", "ExpenseDate", "ExpenseDescription" },
                 values: new object[,]
                 {
-                    { 1, 1, 2200, new DateTime(2022, 2, 3, 9, 47, 9, 341, DateTimeKind.Local).AddTicks(6193), "Laga bil" },
-                    { 2, 1, 500, new DateTime(2022, 2, 3, 9, 47, 9, 341, DateTimeKind.Local).AddTicks(6225), "Kläder" },
-                    { 3, 1, 300, new DateTime(2022, 2, 3, 9, 47, 9, 341, DateTimeKind.Local).AddTicks(6227), "Mat" },
-                    { 4, 1, 400, new DateTime(2022, 2, 3, 9, 47, 9, 341, DateTimeKind.Local).AddTicks(6228), "Spel" }
+                    { 1, 1, 0, 2200, new DateTime(2022, 2, 16, 14, 42, 58, 837, DateTimeKind.Local).AddTicks(4997), "Laga bil" },
+                    { 2, 1, 0, 500, new DateTime(2022, 2, 16, 14, 42, 58, 837, DateTimeKind.Local).AddTicks(5029), "Kläder" },
+                    { 3, 1, 0, 300, new DateTime(2022, 2, 16, 14, 42, 58, 837, DateTimeKind.Local).AddTicks(5031), "Mat" },
+                    { 4, 1, 0, 400, new DateTime(2022, 2, 16, 14, 42, 58, 837, DateTimeKind.Local).AddTicks(5032), "Spel" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Incomes",
-                columns: new[] { "IncomeId", "AccountId", "IncomeBalanceChange", "IncomeDate", "IncomeDescription" },
+                columns: new[] { "IncomeId", "AccountId", "CategoryInc", "IncomeBalanceChange", "IncomeDate", "IncomeDescription" },
                 values: new object[,]
                 {
-                    { 1, 1, 20000, new DateTime(2022, 2, 3, 0, 0, 0, 0, DateTimeKind.Local), "Lön" },
-                    { 2, 1, 8, new DateTime(2022, 2, 3, 0, 0, 0, 0, DateTimeKind.Local), "Skatteåterbäring" }
+                    { 1, 1, 0, 20000, new DateTime(2022, 2, 16, 0, 0, 0, 0, DateTimeKind.Local), "Lön" },
+                    { 2, 1, 0, 8, new DateTime(2022, 2, 16, 0, 0, 0, 0, DateTimeKind.Local), "Skatteåterbäring" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "AccountId", "Email", "Password", "UserName" },
+                values: new object[] { 1, 1, "Test@test.se", "rm/sAiqLgg4nwxJ20sht7IuoLJESlJ54I6QksDKmiQk=@jB1fjqC/s+7s+frCkBnQnw==", "TestKonto1" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Expenses_AccountId",
