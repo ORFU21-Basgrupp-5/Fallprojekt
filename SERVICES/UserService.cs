@@ -7,7 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-
+using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 namespace SERVICES
 {
@@ -53,27 +54,36 @@ namespace SERVICES
             {
                 using (var context = new BudgetContext())
                 {
+                    var emailString = @"^[\w-_]+(\.[\w!#$%'*+\/=?\^`{|}]+)*@((([\-\w]+\.)+[a-zA-Z]{2,20})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$";
+                    Match match = Regex.Match(mail, emailString);
+
                     var account = context.Accounts;
                     var newAccount = new Account() { Name = userName + "'s konto" };
 
-
+                    
                     int id = newAccount.AccountId;
                     var user = context.Users;
                     var newUser = new User() { UserName = userName, Password = HashPassword(password), Email = mail, Account = newAccount };
 
+                    if (match.Success)
+                    {
+                        account.Add(newAccount);
+                        context.SaveChanges();
 
-
-                    account.Add(newAccount);
-                    context.SaveChanges();
-                    user.Add(newUser);
-                    context.SaveChanges();
+                        user.Add(newUser);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new ArgumentException("Email bad");
+                    }
 
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
+                Console.WriteLine(e.Message);
                 return false;
             }
 
