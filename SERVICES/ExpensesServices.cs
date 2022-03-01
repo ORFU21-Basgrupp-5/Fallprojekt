@@ -25,7 +25,7 @@ namespace SERVICES
         }
 
 
-        public void InputExpenses(int saldo, int accountId, string description,string date, CategoryExpense category)
+        public void InputExpenses(int saldo, int accountId, string description,DateTime date, CategoryExpense category)
 
         {
             using (var context = new BudgetContext())
@@ -33,7 +33,7 @@ namespace SERVICES
                 var expense = context.Expenses;
                 var newExpense = new Expense()
                 {
-                    ExpenseDate = DateTime.Parse(date),
+                    ExpenseDate = date,
                     ExpenseDescription = description,
                     AccountId = accountId,
                     ExpenseBalanceChange = saldo,

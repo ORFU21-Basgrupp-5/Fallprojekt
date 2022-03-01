@@ -3,6 +3,7 @@ using DAL.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SERVICES;
+using API.DTO;
 
 namespace API.Controllers
 {
@@ -16,20 +17,20 @@ namespace API.Controllers
         [Authorize]
         [HttpPut]
         [Route("AddIncome")]
-        public IActionResult AddIncome(int saldo, int AccountId, string description, string date, CategoryIncome category)
+        public IActionResult AddIncome(AddIncomeDTO addIncomeDTO)
         {
-            try
-            {
-                DateTime.Parse(date);
-            }
-            catch (Exception)
-            {
+            //try
+            //{
+            //    DateTime.Parse(date);
+            //}
+            //catch (Exception)
+            //{
 
-                return BadRequest("Invalid Date-format");
-            }
+            //    return BadRequest("Invalid Date-format");
+            //}
             try
             {
-                IncomeServices.Instance.InputIncome(saldo, AccountId, description, date, category);
+                IncomeServices.Instance.InputIncome(addIncomeDTO.IncomeBalanceChange, addIncomeDTO.AccountId, addIncomeDTO.IncomeDescription, addIncomeDTO.IncomeDate, addIncomeDTO.IncomeCategory);
                 return Ok();
             }
             catch (Exception)
