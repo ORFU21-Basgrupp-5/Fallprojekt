@@ -40,7 +40,7 @@ namespace API.Controllers
 
         //[HttpPost]
         [Authorize]
-        [HttpPut]
+        [HttpPost]
         [Route("AddExpense")]
         public IActionResult AddExpense(AddExpenseDTO addExpenseDTO)
         {

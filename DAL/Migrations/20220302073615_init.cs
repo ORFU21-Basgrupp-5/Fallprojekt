@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DAL.Migrations
 {
-    public partial class first : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -100,10 +100,10 @@ namespace DAL.Migrations
                 columns: new[] { "ExpenseId", "AccountId", "CategoryExp", "ExpenseBalanceChange", "ExpenseDate", "ExpenseDescription" },
                 values: new object[,]
                 {
-                    { 1, 1, 0, 2200, new DateTime(2022, 2, 16, 14, 42, 58, 837, DateTimeKind.Local).AddTicks(4997), "Laga bil" },
-                    { 2, 1, 0, 500, new DateTime(2022, 2, 16, 14, 42, 58, 837, DateTimeKind.Local).AddTicks(5029), "Kläder" },
-                    { 3, 1, 0, 300, new DateTime(2022, 2, 16, 14, 42, 58, 837, DateTimeKind.Local).AddTicks(5031), "Mat" },
-                    { 4, 1, 0, 400, new DateTime(2022, 2, 16, 14, 42, 58, 837, DateTimeKind.Local).AddTicks(5032), "Spel" }
+                    { 1, 1, 0, 2200, new DateTime(2022, 3, 2, 8, 36, 15, 282, DateTimeKind.Local).AddTicks(6706), "Laga bil" },
+                    { 2, 1, 0, 500, new DateTime(2022, 3, 2, 8, 36, 15, 282, DateTimeKind.Local).AddTicks(6749), "Kläder" },
+                    { 3, 1, 0, 300, new DateTime(2022, 3, 2, 8, 36, 15, 282, DateTimeKind.Local).AddTicks(6753), "Mat" },
+                    { 4, 1, 0, 400, new DateTime(2022, 3, 2, 8, 36, 15, 282, DateTimeKind.Local).AddTicks(6755), "Spel" }
                 });
 
             migrationBuilder.InsertData(
@@ -111,8 +111,8 @@ namespace DAL.Migrations
                 columns: new[] { "IncomeId", "AccountId", "CategoryInc", "IncomeBalanceChange", "IncomeDate", "IncomeDescription" },
                 values: new object[,]
                 {
-                    { 1, 1, 0, 20000, new DateTime(2022, 2, 16, 0, 0, 0, 0, DateTimeKind.Local), "Lön" },
-                    { 2, 1, 0, 8, new DateTime(2022, 2, 16, 0, 0, 0, 0, DateTimeKind.Local), "Skatteåterbäring" }
+                    { 1, 1, 0, 20000, new DateTime(2022, 3, 2, 0, 0, 0, 0, DateTimeKind.Local), "Lön" },
+                    { 2, 1, 0, 8, new DateTime(2022, 3, 2, 0, 0, 0, 0, DateTimeKind.Local), "Skatteåterbäring" }
                 });
 
             migrationBuilder.InsertData(

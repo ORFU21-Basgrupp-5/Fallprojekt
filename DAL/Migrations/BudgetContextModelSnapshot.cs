@@ -87,7 +87,7 @@ namespace DAL.Migrations
                             AccountId = 1,
                             CategoryExp = 0,
                             ExpenseBalanceChange = 2200,
-                            ExpenseDate = new DateTime(2022, 2, 16, 14, 42, 58, 837, DateTimeKind.Local).AddTicks(4997),
+                            ExpenseDate = new DateTime(2022, 3, 2, 8, 36, 15, 282, DateTimeKind.Local).AddTicks(6706),
                             ExpenseDescription = "Laga bil"
                         },
                         new
@@ -96,7 +96,7 @@ namespace DAL.Migrations
                             AccountId = 1,
                             CategoryExp = 0,
                             ExpenseBalanceChange = 500,
-                            ExpenseDate = new DateTime(2022, 2, 16, 14, 42, 58, 837, DateTimeKind.Local).AddTicks(5029),
+                            ExpenseDate = new DateTime(2022, 3, 2, 8, 36, 15, 282, DateTimeKind.Local).AddTicks(6749),
                             ExpenseDescription = "Kläder"
                         },
                         new
@@ -105,7 +105,7 @@ namespace DAL.Migrations
                             AccountId = 1,
                             CategoryExp = 0,
                             ExpenseBalanceChange = 300,
-                            ExpenseDate = new DateTime(2022, 2, 16, 14, 42, 58, 837, DateTimeKind.Local).AddTicks(5031),
+                            ExpenseDate = new DateTime(2022, 3, 2, 8, 36, 15, 282, DateTimeKind.Local).AddTicks(6753),
                             ExpenseDescription = "Mat"
                         },
                         new
@@ -114,7 +114,7 @@ namespace DAL.Migrations
                             AccountId = 1,
                             CategoryExp = 0,
                             ExpenseBalanceChange = 400,
-                            ExpenseDate = new DateTime(2022, 2, 16, 14, 42, 58, 837, DateTimeKind.Local).AddTicks(5032),
+                            ExpenseDate = new DateTime(2022, 3, 2, 8, 36, 15, 282, DateTimeKind.Local).AddTicks(6755),
                             ExpenseDescription = "Spel"
                         });
                 });
@@ -156,7 +156,7 @@ namespace DAL.Migrations
                             AccountId = 1,
                             CategoryInc = 0,
                             IncomeBalanceChange = 20000,
-                            IncomeDate = new DateTime(2022, 2, 16, 0, 0, 0, 0, DateTimeKind.Local),
+                            IncomeDate = new DateTime(2022, 3, 2, 0, 0, 0, 0, DateTimeKind.Local),
                             IncomeDescription = "Lön"
                         },
                         new
@@ -165,7 +165,7 @@ namespace DAL.Migrations
                             AccountId = 1,
                             CategoryInc = 0,
                             IncomeBalanceChange = 8,
-                            IncomeDate = new DateTime(2022, 2, 16, 0, 0, 0, 0, DateTimeKind.Local),
+                            IncomeDate = new DateTime(2022, 3, 2, 0, 0, 0, 0, DateTimeKind.Local),
                             IncomeDescription = "Skatteåterbäring"
                         });
                 });

@@ -15,19 +15,11 @@ namespace API.Controllers
 
         //[HttpPost]
         [Authorize]
-        [HttpPut]
+        [HttpPost]
         [Route("AddIncome")]
         public IActionResult AddIncome(AddIncomeDTO addIncomeDTO)
         {
-            //try
-            //{
-            //    DateTime.Parse(date);
-            //}
-            //catch (Exception)
-            //{
-
-            //    return BadRequest("Invalid Date-format");
-            //}
+            
             try
             {
                 IncomeServices.Instance.InputIncome(addIncomeDTO.IncomeBalanceChange, addIncomeDTO.AccountId, addIncomeDTO.IncomeDescription, addIncomeDTO.IncomeDate, addIncomeDTO.IncomeCategory);
