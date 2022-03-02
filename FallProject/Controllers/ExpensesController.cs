@@ -40,23 +40,23 @@ namespace API.Controllers
 
         //[HttpPost]
         [Authorize]
-        [HttpPut]
+        [HttpPost]
         [Route("AddExpense")]
-        public IActionResult AddExpense(int saldo, int AccountId, string description, string date, CategoryExpense category)
+        public IActionResult AddExpense(AddExpenseDTO addExpenseDTO)
         {
+            //try
+            //{
+            //    DateTime.Parse(date);
+            //}
+            //catch (Exception)
+            //{
+
+            //    return BadRequest("Invalid Date-format");
+            //}
             try
             {
-                DateTime.Parse(date);
-            }
-            catch (Exception)
-            {
 
-                return BadRequest("Invalid Date-format");
-            }
-            try
-            {
-
-                ExpensesServices.Instance.InputExpenses(saldo, AccountId, description,date, category);
+                ExpensesServices.Instance.InputExpenses(addExpenseDTO.ExpenseBalanceChange, addExpenseDTO.AccountId, addExpenseDTO.ExpenseDescription, addExpenseDTO.ExpenseDate, addExpenseDTO.ExpenseCategory);
 
                 return Ok();
             }
