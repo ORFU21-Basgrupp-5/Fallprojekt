@@ -24,7 +24,7 @@ namespace API.Controllers
 
             var username = value.ToString();
             Console.WriteLine(username);
-            foreach (var expenses in service.ListAllExpenses())
+            foreach (var expenses in service.ListAllExpenses(username))
             {
                 result.Add(
                     new ExpenseDTO()

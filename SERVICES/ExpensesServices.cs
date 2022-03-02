@@ -50,11 +50,16 @@ namespace SERVICES
             return;
         }
 
-        public List<Expense> ListAllExpenses()
+        public List<Expense> ListAllExpenses(string user)
         {
             using (var context = new BudgetContext())
             {
-                return context.Expenses.ToList();
+                var usersAccount = context.Users.First(a => a.UserName == user);
+                List<Expense> returnList = new List<Expense>(); 
+                returnList = context.Expenses.Where(a => a.AccountId == usersAccount.Account.AccountId).ToList();
+
+
+                return returnList;
             }
         }
     }
