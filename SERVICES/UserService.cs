@@ -47,7 +47,7 @@ namespace SERVICES
             return result;
         }
 
-        public bool RegisterNewAccount(string userName, string password, string mail)
+        public string RegisterNewAccount(string userName, string password, string mail)
 
         {
             try
@@ -73,18 +73,18 @@ namespace SERVICES
                         user.Add(newUser);
                         context.SaveChanges();
                     }
-                    else
+                    if (!match.Success)
                     {
-                        throw new ArgumentException("Email bad");
+                        return "bad email";
                     }
 
                 }
-                return true;
+                return "all good";
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return false;
+                return "bad bad";
             }
 
 

@@ -57,10 +57,16 @@ namespace API.Controllers
         public IActionResult Register(UserDTO newUser)
         {
             
-                var result = UserService.Instance.RegisterNewAccount(newUser.UserName, newUser.Password, newUser.Email);
-                if(result)
+            var result = UserService.Instance.RegisterNewAccount(newUser.UserName, newUser.Password, newUser.Email);
+            if(result == "all good")
+            {
                 return Ok(result);
-                return BadRequest();
+            } else if(result == "bad email")
+            {
+               return BadRequest("Bad Email");
+            }
+                    
+            return BadRequest();
          
         }
     }
