@@ -74,8 +74,13 @@ namespace API.Controllers
         [HttpPut("recover")]
         public IActionResult RecoverPassword(EmailDTO emailDTO)
         {
-            UserService.Instance.GetUserRecover(emailDTO.Email, emailDTO.NewPassword, emailDTO.ConfirmPassword);
-            return Ok();
+            var result= UserService.Instance.GetUserRecover(emailDTO.Email, emailDTO.NewPassword, emailDTO.ConfirmPassword);
+            if (result == "Ok")
+            {
+                return Ok("Vi har skickat ett email till kontot du angav");
+            }
+            
+            return BadRequest(result);
         }
     }
 

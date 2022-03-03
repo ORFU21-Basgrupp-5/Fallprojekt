@@ -9,6 +9,7 @@ using System.Security.Cryptography;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SERVICES
 {
@@ -19,7 +20,7 @@ namespace SERVICES
         {
             get
             {
-                if(_instance == null)
+                if (_instance == null)
                 {
                     _instance = new UserService();
                 }
@@ -28,16 +29,16 @@ namespace SERVICES
         }
         private UserService() { }
 
-        public string Login(string userName,string passWord)
+        public string Login(string userName, string passWord)
         {
             string result = "";
-            using(var context = new BudgetContext())
+            using (var context = new BudgetContext())
             {
                 var users = context.Users;
-                foreach(var user in users)
+                foreach (var user in users)
                 {
 
-                    if(user.UserName == userName && VerifyPassword(passWord, user.Password))
+                    if (user.UserName == userName && VerifyPassword(passWord, user.Password))
                     {
                         return user.UserName;
 
@@ -60,7 +61,7 @@ namespace SERVICES
                     var account = context.Accounts;
                     var newAccount = new Account() { Name = userName + "'s konto" };
 
-                    
+
                     int id = newAccount.AccountId;
                     var user = context.Users;
                     var newUser = new User() { UserName = userName, Password = HashPassword(password), Email = mail, Account = newAccount };
@@ -125,26 +126,54 @@ namespace SERVICES
 
         }
 
-        public void GetUserRecover(string email, string newPass, string confirmPass)
+        public string GetUserRecover(string email, string newPass, string confirmPass)
         {
             using (var context = new BudgetContext())
             {
                 
-                var findUser = context.Users.First(a => a.Email == email);
+                try
+                {
+                    var findUser = context.Users.First(a => a.Email == email);
 
-                if (findUser != null)
+                    if (findUser!= null&&CheckPassword(newPass) == true)
                     {
-                       findUser.Password = HashPassword(newPass);
+                        findUser.Password = HashPassword(newPass);
                         context.SaveChanges();
-
+                        return "Ok";
                     }
-                    else
+                    else if (findUser!= null && CheckPassword(newPass) == false)
                     {
-                        throw new Exception("Invalid Email");
+                        return "Ditt lösenord måste ha minst 12 tecken,en gemen, en storbokstav, en siffra och ett special tecken";
+                    } else
+                    {
+                        return "Not OK";
                     }
-                
+                }
+                catch (Exception)
+                {
+
+                    return "Ok";
+                }
+
+              
+              
+
+            }
+        }
+
+        public bool CheckPassword(string password)
+        {
+            var paswd = @"/ ^(?=.*[0 - 9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{12,50}$/";
+            Match match = Regex.Match(paswd, password);
+            if (match.Success)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }
-    
+
 }
