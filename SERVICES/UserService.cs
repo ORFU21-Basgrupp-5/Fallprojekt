@@ -125,6 +125,26 @@ namespace SERVICES
 
         }
 
+        public void GetUserRecover(string email, string newPass, string confirmPass)
+        {
+            using (var context = new BudgetContext())
+            {
+                
+                var findUser = context.Users.First(a => a.Email == email);
 
+                if (findUser != null)
+                    {
+                       findUser.Password = HashPassword(newPass);
+                        context.SaveChanges();
+
+                    }
+                    else
+                    {
+                        throw new Exception("Invalid Email");
+                    }
+                
+            }
+        }
     }
+    
 }

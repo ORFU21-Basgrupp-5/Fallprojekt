@@ -13,7 +13,7 @@ namespace API.Controllers
     {
         private readonly ITokenService _tokenService;
         private readonly IConfiguration _configuration;
-        public UserController(ITokenService tokenService,  IConfiguration config)
+        public UserController(ITokenService tokenService, IConfiguration config)
         {
             _tokenService = tokenService;
             _configuration = config;
@@ -23,7 +23,8 @@ namespace API.Controllers
 
         [AllowAnonymous]
         [HttpPost("login")]
-        public IActionResult Login(UserLoginDTO userLoginDTO) {
+        public IActionResult Login(UserLoginDTO userLoginDTO)
+        {
 
             if (string.IsNullOrEmpty(userLoginDTO.UserName) || string.IsNullOrEmpty(userLoginDTO.Password))
             {
@@ -33,7 +34,7 @@ namespace API.Controllers
 
 
             var result = UserService.Instance.Login(userLoginDTO.UserName, userLoginDTO.Password);
-            if(result != "")
+            if (result != "")
             {
                 var generatedToken = _tokenService.BuildToken(_configuration["Jwt:Key"].ToString(), _configuration["Jwt:Issuer"].ToString(), result);
                 return Ok(new
@@ -56,18 +57,27 @@ namespace API.Controllers
         [HttpPost("register")]
         public IActionResult Register(UserDTO newUser)
         {
-            
+
             var result = UserService.Instance.RegisterNewAccount(newUser.UserName, newUser.Password, newUser.Email);
-            if(result == "all good")
+            if (result == "all good")
             {
                 return Ok(result);
-            } else if(result == "bad email")
-            {
-               return BadRequest("Bad Email");
             }
-                    
+            else if (result == "bad email")
+            {
+                return BadRequest("Bad Email");
+            }
+
             return BadRequest();
-         
+
+        }
+        [HttpPut("recover")]
+        public IActionResult RecoverPassword(EmailDTO emailDTO)
+        {
+            UserService.Instance.GetUserRecover(emailDTO.Email, emailDTO.NewPassword, emailDTO.ConfirmPassword);
+            return Ok();
         }
     }
+
+
 }
