@@ -163,9 +163,8 @@ namespace SERVICES
 
         public bool CheckPassword(string password)
         {
-            var paswd = @"/ ^(?=.*[0 - 9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{12,50}$/";
-            Match match = Regex.Match(paswd, password);
-            if (match.Success)
+            var paswd = new Regex(@"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{12,50}$");
+            if (paswd.IsMatch(password))
             {
                 return true;
             }
