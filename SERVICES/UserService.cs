@@ -34,17 +34,32 @@ namespace SERVICES
 
         public string Login(string userName, string passWord)
         {
+
             string result = "";
             using (var context = new BudgetContext())
             {
                 var users = context.Users;
-                foreach (var user in users)
-                {
 
-                    if (user.UserName == userName && VerifyPassword(passWord, user.Password))
+                try
+                {
+                    foreach (var user in users)
                     {
-                        return user.UserName;
+
+                        if (user.UserName == userName && VerifyPassword(passWord, user.Password))
+                        {
+                            return user.UserName;
+                        }
+                        else
+                        {
+                            throw new Exception("Kunde inte logga in");
+                        }
+
                     }
+
+                }
+                catch(Exception ex)
+                {
+                    return ex.Message;
                 }
             }
             return result;
@@ -53,16 +68,30 @@ namespace SERVICES
         public string RegisterNewAccount(string userName, string password, string mail)
 
         {
+
             try
             {
                 using (var context = new BudgetContext())
                 {
+
                     var emailString = @"^[\w-_]+(\.[\w!#$%'*+\/=?\^`{|}]+)*@((([\-\w]+\.)+[a-zA-Z]{2,20})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$";
                     Match match = Regex.Match(mail, emailString);
 
+
+                    var user = context.Users;
+                    foreach (var userexist in user)
+                    {
+
+                        if (userexist.UserName == userName)
+                        {
+
+                            throw new Exception("User already exists");
+
+                        }
+                    }
+                    
                     var account = context.Accounts;
                     var newAccount = new Account() { Name = userName + "'s konto" };
-
 
                     int id = newAccount.AccountId;
                     var user = context.Users;
@@ -78,19 +107,19 @@ namespace SERVICES
                     }
                     if (!match.Success)
                     {
-                        return "bad email";
+                         throw new Exception("bad email");
                     }
 
                 }
-                return "all good";
+
+                return "true";
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine(e.Message);
-                return "bad bad";
+
+                return ex.Message;
+
             }
-
-
 
 
         }
@@ -144,7 +173,7 @@ namespace SERVICES
                     }
                     else if (findUser != null && CheckPassword(newPass) == false)
                     {
-                        return "Ditt lösenord måste ha minst 12 tecken,en gemen, en storbokstav, en siffra och ett special tecken";
+                        return "Ditt lï¿½senord mï¿½ste ha minst 12 tecken,en gemen, en storbokstav, en siffra och ett special tecken";
                     }
                     else
                     {

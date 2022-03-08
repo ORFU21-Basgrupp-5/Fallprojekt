@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SERVICES;
+using System.Net;
+using System.Web.Http.Results;
 
 namespace API.Controllers
 {
@@ -16,6 +18,7 @@ namespace API.Controllers
         [HttpGet("/ListExpenses")]
         public IActionResult List()
         {
+            try {
             var service = new ExpensesServices();
             var result = new List<ExpenseDTO>();
             string id;
@@ -36,6 +39,12 @@ namespace API.Controllers
                     );
             }
             return Ok(result);
+            
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         //[HttpPost]
@@ -44,29 +53,39 @@ namespace API.Controllers
         [Route("AddExpense")]
         public IActionResult AddExpense(AddExpenseDTO addExpenseDTO)
         {
-            //try
-            //{
-            //    DateTime.Parse(date);
-            //}
-            //catch (Exception)
-            //{
-
-            //    return BadRequest("Invalid Date-format");
-            //}
+            
             try
             {
-
                 ExpensesServices.Instance.InputExpenses(addExpenseDTO.ExpenseBalanceChange, addExpenseDTO.AccountId, addExpenseDTO.ExpenseDescription, addExpenseDTO.ExpenseDate, addExpenseDTO.ExpenseCategory);
 
                 return Ok();
             }
             catch (Exception ex)
             {
-
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("Categories")]
+
+        public IActionResult GetCategories()
+        {
+            try
+            {
+                List<string> categories = new List<string>();
+                categories = Enum.GetNames(typeof(CategoryExpense)).ToList();
+                return Ok(categories);
+            }
+            catch
+            {
+                return NotFound();
+            }
+
 
         }
         //[HttpDelete]
+
     }
 }
