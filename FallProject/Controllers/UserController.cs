@@ -82,6 +82,21 @@ namespace API.Controllers
             
             return BadRequest(result);
         }
+        [HttpPost("SendRecoveryEmail")]
+        public IActionResult SendEmail(RecoveryDTO recoveryDTO)
+        {
+            var tokenuser = UserService.Instance.GetUser(recoveryDTO.Email);
+            if(tokenuser != null)
+            {
+                var generatedToken = _tokenService.BuildToken(_configuration["Jwt:Key"].ToString(), _configuration["Jwt:Issuer"].ToString(), tokenuser);
+                var result = UserService.Instance.SendRecoverEmail(recoveryDTO.Email, generatedToken);
+                if (result == true)
+                {
+                    return Ok("Sent the email");
+                }
+            }
+            return BadRequest("Did not send the email");
+        }
     }
 
 

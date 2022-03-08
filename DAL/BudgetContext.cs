@@ -13,7 +13,7 @@ namespace DAL
     {
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            var connectionString = @"Server=localhost\SQLEXPRESS; Database = BudgetDB; Integrated Security=True";
+            var connectionString = @"Server=localhost; Database = BudgetDB; Integrated Security=True";
 
             builder.UseSqlServer(connectionString).UseLazyLoadingProxies();
         }
