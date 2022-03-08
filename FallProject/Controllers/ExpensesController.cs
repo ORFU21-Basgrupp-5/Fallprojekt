@@ -18,6 +18,7 @@ namespace API.Controllers
         [HttpGet("/ListExpenses")]
         public IActionResult List()
         {
+            try {
             var service = new ExpensesServices();
             var result = new List<ExpenseDTO>();
             string id;
@@ -38,6 +39,12 @@ namespace API.Controllers
                     );
             }
             return Ok(result);
+            
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         //[HttpPost]
@@ -49,14 +56,13 @@ namespace API.Controllers
             
             try
             {
-
                 ExpensesServices.Instance.InputExpenses(addExpenseDTO.ExpenseBalanceChange, addExpenseDTO.AccountId, addExpenseDTO.ExpenseDescription, addExpenseDTO.ExpenseDate, addExpenseDTO.ExpenseCategory);
 
                 return Ok();
             }
             catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
         }
     }
