@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SERVICES;
 using API.DTO;
+using System.Linq;
 
 namespace API.Controllers
 {
@@ -32,7 +33,25 @@ namespace API.Controllers
             }
 
         }
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("Categorys")]
 
+        public IActionResult GetCategorys()
+        { 
+            try
+            {
+                List<string> categories = new List<string>();
+                categories = Enum.GetNames(typeof(CategoryIncome)).ToList();
+                return Ok(categories);
+            }
+            catch
+            {
+                return NotFound();
+            }
+            
+            
+        }
         //[HttpDelete]
 
     }
