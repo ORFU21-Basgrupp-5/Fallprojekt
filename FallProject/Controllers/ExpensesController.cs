@@ -69,7 +69,7 @@ namespace API.Controllers
         }
         [AllowAnonymous]
         [HttpGet]
-        [Route("Categorys")]
+        [Route("Categories")]
 
         public IActionResult GetCategories()
         {
