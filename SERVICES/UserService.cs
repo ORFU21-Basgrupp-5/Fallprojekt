@@ -46,13 +46,25 @@ namespace SERVICES
             return result;
         }
 
-        public bool RegisterNewAccount(string userName, string password, string mail)
+        public string RegisterNewAccount(string userName, string password, string mail)
 
         {
+            
             try
             {
                 using (var context = new BudgetContext())
                 {
+                    var checkusers = context.Users;
+                    foreach (var userexist in checkusers)
+                    {
+
+                        if (userexist.UserName == userName )
+                        {
+
+                            throw new Exception("User already exists");
+
+                        }
+                    }
                     var account = context.Accounts;
                     var newAccount = new Account() { Name = userName + "'s konto" };
 
@@ -69,12 +81,12 @@ namespace SERVICES
                     context.SaveChanges();
 
                 }
-                return true;
+                return "true";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                return false;
+                return ex.Message;
             }
 
 

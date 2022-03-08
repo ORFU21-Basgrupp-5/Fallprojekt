@@ -42,7 +42,7 @@ namespace API.Controllers
                     user = result
                 });
             }
-            return RedirectToAction("Error");
+            return BadRequest("Error");
         }
 
         [Authorize]
@@ -58,9 +58,11 @@ namespace API.Controllers
         {
             
                 var result = UserService.Instance.RegisterNewAccount(newUser.UserName, newUser.Password, newUser.Email);
-                if(result)
+            if (result == "true")
+            {
                 return Ok(result);
-                return BadRequest();
+            }
+                return BadRequest(result);
          
         }
     }
