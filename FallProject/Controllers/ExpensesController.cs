@@ -71,7 +71,7 @@ namespace API.Controllers
         [HttpGet]
         [Route("Categorys")]
 
-        public IActionResult GetCategorys()
+        public IActionResult GetCategories()
         {
             try
             {
