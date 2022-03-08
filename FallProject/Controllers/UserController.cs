@@ -65,13 +65,56 @@ namespace API.Controllers
         public IActionResult Register(UserDTO newUser)
         {
 
+
+
             var result = UserService.Instance.RegisterNewAccount(newUser.UserName, newUser.Password, newUser.Email);
-            if (result == "true")
+            if (result == "all good")
             {
                 return Ok(result);
             }
+            else if (result == "bad email")
+            {
+                return BadRequest("Bad Email");
+            }
+
+            return BadRequest();
+
+        }
+
+        [Authorize]
+        [HttpPut("recover")]
+        public IActionResult RecoverPassword(NewPasswordDTO newpasswordDTO)
+        {
+            string id;
+            object value;
+            ControllerContext.HttpContext.Items.TryGetValue("Username", out value);
+
+            var username = value.ToString();
+            var result = UserService.Instance.ChangePassword(newpasswordDTO.NewPassword, newpasswordDTO.ConfirmPassword, username);
+            if (result == "Ok")
+            {
+                return Ok("Changed password");
+            }
+
             return BadRequest(result);
+        }
+
+        [HttpPost("SendRecoveryEmail")]
+        public IActionResult SendEmail(RecoveryDTO recoveryDTO)
+        {
+            var tokenuser = UserService.Instance.GetUser(recoveryDTO.Email);
+            if (tokenuser != null)
+            {
+                var generatedToken = _tokenService.BuildToken(_configuration["Jwt:Key"].ToString(), _configuration["Jwt:Issuer"].ToString(), tokenuser);
+                var result = UserService.Instance.SendRecoverEmail(recoveryDTO.Email, generatedToken);
+                if (result == true)
+                {
+                    return Ok("Sent the email");
+                }
+            }
+            return BadRequest("Did not send the email");
 
         }
     }
 }
+
