@@ -50,7 +50,18 @@ namespace SERVICES
 
             return;
         }
+        public List<Income> ListAllIncomes(string user)
+        {
+            using (var context = new BudgetContext())
+            {
+                var usersAccount = context.Users.First(a => a.UserName == user);
+                List<Income> returnList = new List<Income>();
+                returnList = context.Incomes.Where(a => a.AccountId == usersAccount.Account.AccountId).ToList();
 
+
+                return returnList;
+            }
+        }
     }
 
 }

@@ -27,7 +27,7 @@ namespace API.Controllers
 
             var username = value.ToString();
             Console.WriteLine(username);
-            foreach (var expenses in service.ListAllExpenses())
+            foreach (var expenses in service.ListAllExpenses(username))
             {
                 result.Add(
                     new ExpenseDTO()
@@ -65,5 +65,27 @@ namespace API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("Categories")]
+
+        public IActionResult GetCategories()
+        {
+            try
+            {
+                List<string> categories = new List<string>();
+                categories = Enum.GetNames(typeof(CategoryExpense)).ToList();
+                return Ok(categories);
+            }
+            catch
+            {
+                return NotFound();
+            }
+
+
+        }
+        //[HttpDelete]
+
     }
 }
