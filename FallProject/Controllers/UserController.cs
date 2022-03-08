@@ -81,10 +81,10 @@ namespace API.Controllers
             ControllerContext.HttpContext.Items.TryGetValue("Username", out value);
 
             var username = value.ToString();
-            var result = UserService.Instance.GetUserRecover(newpasswordDTO.NewPassword, newpasswordDTO.ConfirmPassword, username);
+            var result = UserService.Instance.ChangePassword(newpasswordDTO.NewPassword, newpasswordDTO.ConfirmPassword, username);
             if (result == "Ok")
             {
-                return Ok("Vi har skickat ett email till kontot du angav");
+                return Ok("Changed password");
             }
 
             return BadRequest(result);

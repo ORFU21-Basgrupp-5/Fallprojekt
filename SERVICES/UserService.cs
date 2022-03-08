@@ -44,7 +44,6 @@ namespace SERVICES
                     if (user.UserName == userName && VerifyPassword(passWord, user.Password))
                     {
                         return user.UserName;
-
                     }
                 }
             }
@@ -129,7 +128,7 @@ namespace SERVICES
 
         }
 
-        public string GetUserRecover(string newPass, string confirmPass, string username)
+        public string ChangePassword(string newPass, string confirmPass, string username)
         {
             using (var context = new BudgetContext())
             {
