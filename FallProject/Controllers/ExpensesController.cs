@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SERVICES;
+using System.Net;
+using System.Web.Http.Results;
 
 namespace API.Controllers
 {
@@ -44,15 +46,7 @@ namespace API.Controllers
         [Route("AddExpense")]
         public IActionResult AddExpense(AddExpenseDTO addExpenseDTO)
         {
-            //try
-            //{
-            //    DateTime.Parse(date);
-            //}
-            //catch (Exception)
-            //{
-
-            //    return BadRequest("Invalid Date-format");
-            //}
+            
             try
             {
 
@@ -62,11 +56,8 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-
                 return BadRequest();
             }
-
         }
-        //[HttpDelete]
     }
 }
