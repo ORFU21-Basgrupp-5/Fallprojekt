@@ -35,7 +35,7 @@ namespace API.Controllers
         }
         [AllowAnonymous]
         [HttpGet]
-        [Route("Categorys")]
+        [Route("categories")]
 
         public IActionResult GetCategories()
         { 
