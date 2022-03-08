@@ -67,6 +67,25 @@ namespace API.Controllers
             }
 
         }
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("Categories")]
+
+        public IActionResult GetCategories()
+        {
+            try
+            {
+                List<string> categories = new List<string>();
+                categories = Enum.GetNames(typeof(CategoryExpense)).ToList();
+                return Ok(categories);
+            }
+            catch
+            {
+                return NotFound();
+            }
+
+
+        }
         //[HttpDelete]
     }
 }
