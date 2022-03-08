@@ -13,7 +13,7 @@ namespace API.Controllers
     {
         private readonly ITokenService _tokenService;
         private readonly IConfiguration _configuration;
-        public UserController(ITokenService tokenService,  IConfiguration config)
+        public UserController(ITokenService tokenService, IConfiguration config)
         {
             _tokenService = tokenService;
             _configuration = config;
@@ -23,26 +23,34 @@ namespace API.Controllers
 
         [AllowAnonymous]
         [HttpPost("login")]
-        public IActionResult Login(UserLoginDTO userLoginDTO) {
+        public IActionResult Login(UserLoginDTO userLoginDTO)
+        {
 
-            if (string.IsNullOrEmpty(userLoginDTO.UserName) || string.IsNullOrEmpty(userLoginDTO.Password))
+            try
             {
-                return RedirectToAction("Error");
-            }
-
-
-
-            var result = UserService.Instance.Login(userLoginDTO.UserName, userLoginDTO.Password);
-            if(result != "")
-            {
-                var generatedToken = _tokenService.BuildToken(_configuration["Jwt:Key"].ToString(), _configuration["Jwt:Issuer"].ToString(), result);
-                return Ok(new
+                if (string.IsNullOrEmpty(userLoginDTO.UserName) || string.IsNullOrEmpty(userLoginDTO.Password))
                 {
-                    token = generatedToken,
-                    user = result
-                });
+                    throw new Exception("Måste fylla i samtliga fält");
+                }
+
+
+
+                var result = UserService.Instance.Login(userLoginDTO.UserName, userLoginDTO.Password);
+                if (result != "")
+                {
+                    var generatedToken = _tokenService.BuildToken(_configuration["Jwt:Key"].ToString(), _configuration["Jwt:Issuer"].ToString(), result);
+                    return Ok(new
+                    {
+                        token = generatedToken,
+                        user = result
+                    });
+                }
+                return Ok();
             }
-            return RedirectToAction("Error");
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [Authorize]
@@ -56,12 +64,14 @@ namespace API.Controllers
         [HttpPost("register")]
         public IActionResult Register(UserDTO newUser)
         {
-            
-                var result = UserService.Instance.RegisterNewAccount(newUser.UserName, newUser.Password, newUser.Email);
-                if(result)
+
+            var result = UserService.Instance.RegisterNewAccount(newUser.UserName, newUser.Password, newUser.Email);
+            if (result == "true")
+            {
                 return Ok(result);
-                return BadRequest();
-         
+            }
+            return BadRequest(result);
+
         }
     }
 }

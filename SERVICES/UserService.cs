@@ -18,7 +18,7 @@ namespace SERVICES
         {
             get
             {
-                if(_instance == null)
+                if (_instance == null)
                 {
                     _instance = new UserService();
                 }
@@ -27,32 +27,56 @@ namespace SERVICES
         }
         private UserService() { }
 
-        public string Login(string userName,string passWord)
+        public string Login(string userName, string passWord)
         {
+
             string result = "";
-            using(var context = new BudgetContext())
+            using (var context = new BudgetContext())
             {
                 var users = context.Users;
-                foreach(var user in users)
+                try
                 {
-
-                    if(user.UserName == userName && VerifyPassword(passWord, user.Password))
+                    foreach (var user in users)
                     {
-                        return user.UserName;
 
+                        if (user.UserName == userName && VerifyPassword(passWord, user.Password))
+                        {
+                            return user.UserName;
+                        }
+                        else
+                        {
+                            throw new Exception("Kunde inte logga in");
+                        }
                     }
+
+                }
+                catch(Exception ex)
+                {
+                    return ex.Message;
                 }
             }
             return result;
         }
 
-        public bool RegisterNewAccount(string userName, string password, string mail)
+        public string RegisterNewAccount(string userName, string password, string mail)
 
         {
+
             try
             {
                 using (var context = new BudgetContext())
                 {
+                    var checkusers = context.Users;
+                    foreach (var userexist in checkusers)
+                    {
+
+                        if (userexist.UserName == userName)
+                        {
+
+                            throw new Exception("User already exists");
+
+                        }
+                    }
                     var account = context.Accounts;
                     var newAccount = new Account() { Name = userName + "'s konto" };
 
@@ -69,12 +93,12 @@ namespace SERVICES
                     context.SaveChanges();
 
                 }
-                return true;
+                return "true";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                return false;
+                return ex.Message;
             }
 
 
