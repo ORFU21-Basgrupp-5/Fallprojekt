@@ -15,6 +15,8 @@ namespace API.Controllers
         [HttpGet("/ListIncome")]
         public IActionResult List()
         {
+            try
+            {
             var service = new IncomeServices();
             var result = new List<IncomeDTO>();
             string id;
@@ -36,7 +38,13 @@ namespace API.Controllers
                      }
                     );
             }
+
             return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         //[HttpPost]

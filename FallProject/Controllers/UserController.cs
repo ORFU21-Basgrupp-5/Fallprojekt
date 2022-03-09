@@ -65,10 +65,10 @@ namespace API.Controllers
         public IActionResult Register(UserDTO newUser)
         {
 
-
+            
 
             var result = UserService.Instance.RegisterNewAccount(newUser.UserName, newUser.Password, newUser.Email);
-            if (result == "all good")
+            if (result == "true")
             {
                 return Ok(result);
             }
