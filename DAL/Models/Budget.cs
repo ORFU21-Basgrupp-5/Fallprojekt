@@ -11,7 +11,8 @@ namespace DAL.Models
         public int Id { get; set; }
         public string BudgetName { get; set; }
         public int TotalSum { get; set; }
-        public int CurrentTotalUsed { get; set; }
+        public int Month { get; set; }
+        public int Year { get; set; }
         //Navigation Properties
         public virtual List<BudgetEntries> BudgetCategories { get; set; }
 
