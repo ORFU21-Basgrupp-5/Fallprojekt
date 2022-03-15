@@ -12,7 +12,7 @@ namespace API.Controllers
     public class BudgetController : ControllerBase
     {
 
-        [Authorize]
+        //[Authorize]
         [HttpPost("Create")]
         public IActionResult CreateBudget(CreateBudgetDTO Budget)
         {
