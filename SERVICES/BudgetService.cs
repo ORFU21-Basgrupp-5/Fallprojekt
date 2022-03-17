@@ -22,12 +22,16 @@ namespace SERVICES
                 return _instance;
             }
         }
-        public bool AddBudget(string Name, int TotalSum, int Month,int Year, Dictionary<CategoryExpense, int> BudgetCategories)
+        public string AddBudget(string Name, int TotalSum, int Month,int Year, Dictionary<CategoryExpense, int> BudgetCategories, string username)
         {
+
             try
             {
                 using (var context = new BudgetContext())
                 {
+                    var user = context.Users.First(a => a.UserName == username);
+                    var account = context.Accounts.First(a => a.AccountId == user.Account.AccountId);
+
                     var budgets = context.Budgets;
                     var budgetentries = new List<BudgetEntries>();
                     foreach (var category in BudgetCategories)
@@ -45,20 +49,28 @@ namespace SERVICES
                     {
                         BudgetName = Name,
                         TotalSum = TotalSum,
-                        Month = Month,
+                        Month = Month + 1,
                         Year = Year,
                         BudgetCategories = budgetentries
+
                     };
-                    
+                    account.Budgets.Add(newBudget);
                     budgets.Add(newBudget);
                     context.SaveChanges();
-                    return true;
+                    return "Added";
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                return ex.Message;
             }
+               
+           
+          
+            
+            
+                
+            
         }
     }
 }
