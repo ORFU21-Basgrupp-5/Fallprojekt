@@ -45,7 +45,12 @@ namespace API.Controllers
                         user = result
                     });
                 }
-                return Ok();
+                else 
+                {
+                    throw new Exception("Kunde inte logga in");
+                        
+                }
+
             }
             catch (Exception ex)
             {
