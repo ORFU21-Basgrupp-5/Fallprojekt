@@ -34,6 +34,7 @@ namespace DAL
             #region(Propertys)
             modelBuilder.Entity<User>().Property(u => u.UserName).HasMaxLength(25);
             modelBuilder.Entity<User>().HasIndex(u => u.UserName).IsUnique();
+            modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
             modelBuilder.Entity<User>().Property(p => p.Password).HasMaxLength(150);
             //minst 2 siffror minst 2 stora bokstäver minst 1 special tecken.
             modelBuilder.Entity<User>().Property(e => e.Email).HasMaxLength(255);
