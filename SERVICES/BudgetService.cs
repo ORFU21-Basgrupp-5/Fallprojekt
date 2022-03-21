@@ -56,8 +56,9 @@ namespace SERVICES
                         .Where(e => e.CategoryExp.ToString() == currentCategoryName && e.ExpenseDate.Year == year && e.ExpenseDate.Month == month)
                         .Select(e => e.ExpenseBalanceChange)
                         .Sum();
-                    var totalAmount = context.BudgetsEntries.First(be => be.BudgetId == budget.Id);
-                
+                    var totalBudgetAmount = budget.BudgetCategories.First(b => b.BudgeeCategory.ToString() == currentCategoryName).CategoryBudgetAmount;
+                    budgetentries.Add(totalBudgetAmount.ToString());
+                    budgetentries.Add(expenseamont.ToString());
                 }
                 
 

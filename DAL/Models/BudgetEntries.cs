@@ -12,6 +12,5 @@ namespace DAL.Models
         public CategoryExpense BudgeeCategory{ get; set; }
         public int CategoryBudgetAmount { get; set; }
 
-       
     }
 }

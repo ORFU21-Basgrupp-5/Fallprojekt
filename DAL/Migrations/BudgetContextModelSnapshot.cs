@@ -39,7 +39,7 @@ namespace DAL.Migrations
 
                     b.HasKey("AccountId");
 
-                    b.ToTable("Accounts");
+                    b.ToTable("Accounts", (string)null);
 
                     b.HasData(
                         new
@@ -78,7 +78,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("AccountId");
 
-                    b.ToTable("Budgets");
+                    b.ToTable("Budgets", (string)null);
                 });
 
             modelBuilder.Entity("DAL.Models.BudgetEntries", b =>
@@ -102,7 +102,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("BudgetId");
 
-                    b.ToTable("BudgetsEntries");
+                    b.ToTable("BudgetsEntries", (string)null);
                 });
 
             modelBuilder.Entity("DAL.Models.Expense", b =>
@@ -133,7 +133,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("AccountId");
 
-                    b.ToTable("Expenses");
+                    b.ToTable("Expenses", (string)null);
 
                     b.HasData(
                         new
@@ -202,7 +202,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("AccountId");
 
-                    b.ToTable("Incomes");
+                    b.ToTable("Incomes", (string)null);
 
                     b.HasData(
                         new
@@ -258,7 +258,7 @@ namespace DAL.Migrations
                     b.HasIndex("UserName")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
 
                     b.HasData(
                         new

@@ -16,17 +16,22 @@ namespace API.Controllers
         [HttpGet("RetrieveBudget")]
         public IActionResult ShowCurentBudget ()
         {
-            object value;
-            ControllerContext.HttpContext.Items.TryGetValue("Username", out value);
-
-            var username = value.ToString();
-
-            string result = BudgetService.Instance.GetBudget(username);
-            if (result == "Added")
+           
+            try
             {
+                object value;
+                ControllerContext.HttpContext.Items.TryGetValue("Username", out value);
+
+                var username = value.ToString();
+
+                string[,] result = BudgetService.Instance.GetBudget(username);
+
                 return Ok(result);
             }
-            return BadRequest(result);
+            catch
+            {
+                return BadRequest("Oops");
+            }
         }
         [Authorize]
         [HttpPost("Create")]
