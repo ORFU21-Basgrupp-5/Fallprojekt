@@ -13,6 +13,22 @@ namespace API.Controllers
     {
 
         [Authorize]
+        [HttpGet("RetrieveBudget")]
+        public IActionResult ShowCurentBudget ()
+        {
+            object value;
+            ControllerContext.HttpContext.Items.TryGetValue("Username", out value);
+
+            var username = value.ToString();
+
+            string result = BudgetService.Instance.GetBudget(username);
+            if (result == "Added")
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [Authorize]
         [HttpPost("Create")]
         public IActionResult CreateBudget(CreateBudgetDTO Budget)
         {
