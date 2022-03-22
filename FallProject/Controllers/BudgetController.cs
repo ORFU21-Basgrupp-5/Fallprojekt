@@ -4,6 +4,7 @@ using API.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using API.DTO;
 using SERVICES;
+using DAL.Models;
 
 namespace API.Controllers
 {
@@ -24,9 +25,23 @@ namespace API.Controllers
 
                 var username = value.ToString();
 
-                string[,] result = BudgetService.Instance.GetBudget(username);
+                var result = BudgetService.Instance.GetBudget(username);
+                Dictionary<string, List<string>> budgetCategories = new Dictionary<string, List<string>>();
+                for (int i = 1; i < result.GetLength(1); i++)
+                {
+                    budgetCategories.Add(result[0,i], new List<string>{result[1,i], result[2,i] } );
+                };
 
-                return Ok(result);
+                var budgetDTO = new RetrieveBudgetDTO
+                {
+                    BudgetName = result[0,0],
+                    TotalSum =  Convert.ToInt32(result[1,0]),
+                    UsedAmount = Convert.ToInt32(result[2,0]),
+                    BudgetCategories = budgetCategories
+
+                };
+
+                return Ok(budgetDTO);
             }
             catch
             {

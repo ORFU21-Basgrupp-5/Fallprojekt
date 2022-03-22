@@ -33,41 +33,37 @@ namespace SERVICES
                 var month = currentDate.Month;
                 var year = currentDate.Year;
 
-                var budget = context.Budgets.First(b => b.Year ==  year && b.Month == month);
-
                 var usersAccount = context.Users.First(a => a.UserName == username);
+
+                var budget = usersAccount.Account.Budgets.First(b => b.Year ==  year && b.Month == month);
+
+                
 
                 var nrOfCategories = Enum.GetValues(typeof(CategoryExpense)).Length;
 
-                string[,] budgetArray = new string[nrOfCategories+1, 3];
+                string[,] budgetArray = new string [3,nrOfCategories + 1];
 
                
-                budgetArray[0, 0] = budget.BudgetName;
+                budgetArray[0,0] = budget.BudgetName;
                 
-                budgetArray [1,0] =budget.TotalSum.ToString();
-                List <string> budgetentries = new List<string>();
-
+                budgetArray[1,0] =budget.TotalSum.ToString();
+                var allexpenses = context.Expenses.ToList();
+                int budgetTotalUse = 0;
 
                 for (var i = 0; i < nrOfCategories; i++)
                 {
                     var currentCategoryName = Enum.GetName(typeof(CategoryExpense), i);
-                    budgetentries.Add(currentCategoryName);
-                    var expenseamont = context.Expenses
-                        .Where(e => e.CategoryExp.ToString() == currentCategoryName && e.ExpenseDate.Year == year && e.ExpenseDate.Month == month)
+                    budgetArray [0,i+1] = currentCategoryName;
+                    var expenseamont = allexpenses
+                        .Where(e => Convert.ToInt32(e.CategoryExp) == i && e.ExpenseDate.Year == year && e.ExpenseDate.Month == month)
                         .Select(e => e.ExpenseBalanceChange)
                         .Sum();
                     var totalBudgetAmount = budget.BudgetCategories.First(b => b.BudgeeCategory.ToString() == currentCategoryName).CategoryBudgetAmount;
-                    budgetentries.Add(totalBudgetAmount.ToString());
-                    budgetentries.Add(expenseamont.ToString());
+                    budgetArray[1,i+1] = totalBudgetAmount.ToString();
+                    budgetArray[2,i+1] = expenseamont.ToString();
+                    budgetTotalUse += expenseamont;
                 }
-                
-
-                //List<Expense> returnList = new List<Expense>();
-                //returnList = context.Expenses.Where(a => a.AccountId == usersAccount.Account.AccountId).ToList();
-                //budget namn
-                //kategorier
-                //expense under perioden
-                // summa under perioden
+                budgetArray[2,0] = budgetTotalUse.ToString();
 
                 return budgetArray;
             }
