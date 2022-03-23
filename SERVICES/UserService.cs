@@ -91,8 +91,8 @@ namespace SERVICES
                     var account = context.Accounts;
                     var newAccount = new Account() { Name = userName + "'s konto" };
 
-                    //int id = newAccount.AccountId;
-                   
+                    int id = newAccount.AccountId;
+
                     var newUser = new User() { UserName = userName, Password = HashPassword(password), Email = mail, Account = newAccount };
 
                     if (match.Success)
