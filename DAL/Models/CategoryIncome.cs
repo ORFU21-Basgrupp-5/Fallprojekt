@@ -14,5 +14,6 @@ namespace DAL.Models
         Swish,
         Other
 
+
     }
 }

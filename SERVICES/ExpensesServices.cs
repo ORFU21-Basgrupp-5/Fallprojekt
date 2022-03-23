@@ -25,7 +25,7 @@ namespace SERVICES
         }
 
 
-        public void InputExpenses(int saldo, int accountId, string description,string date, CategoryExpense category)
+        public void InputExpenses(int saldo, int accountId, string description,DateTime date, CategoryExpense category)
 
         {
             using (var context = new BudgetContext())
@@ -33,7 +33,7 @@ namespace SERVICES
                 var expense = context.Expenses;
                 var newExpense = new Expense()
                 {
-                    ExpenseDate = DateTime.Parse(date),
+                    ExpenseDate = date,
                     ExpenseDescription = description,
                     AccountId = accountId,
                     ExpenseBalanceChange = saldo,
@@ -50,11 +50,16 @@ namespace SERVICES
             return;
         }
 
-        public List<Expense> ListAllExpenses()
+        public List<Expense> ListAllExpenses(string user)
         {
             using (var context = new BudgetContext())
             {
-                return context.Expenses.ToList();
+                var usersAccount = context.Users.First(a => a.UserName == user);
+                List<Expense> returnList = new List<Expense>(); 
+                returnList = context.Expenses.Where(a => a.AccountId == usersAccount.Account.AccountId).ToList();
+
+
+                return returnList;
             }
         }
     }

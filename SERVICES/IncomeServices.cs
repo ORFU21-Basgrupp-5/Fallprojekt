@@ -23,7 +23,7 @@ namespace SERVICES
             }
         }
 
-        public void InputIncome(int saldo, int accountId, string description,string date, CategoryIncome category)
+        public void InputIncome(int saldo, int accountId, string description,DateTime date, CategoryIncome category)
         {
 
 
@@ -32,7 +32,7 @@ namespace SERVICES
                 var income = context.Incomes;
                 var newIncome = new Income()
                 {
-                    IncomeDate = DateTime.Parse(date),
+                    IncomeDate = date,
                     IncomeDescription = description,
                     AccountId = accountId,
                     IncomeBalanceChange = saldo,
@@ -50,7 +50,18 @@ namespace SERVICES
 
             return;
         }
+        public List<Income> ListAllIncomes(string user)
+        {
+            using (var context = new BudgetContext())
+            {
+                var usersAccount = context.Users.First(a => a.UserName == user);
+                List<Income> returnList = new List<Income>();
+                returnList = context.Incomes.Where(a => a.AccountId == usersAccount.Account.AccountId).ToList();
 
+
+                return returnList;
+            }
+        }
     }
 
 }

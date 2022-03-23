@@ -1,4 +1,6 @@
-﻿namespace API.DTO
+﻿using DAL.Models;
+
+namespace API.DTO
 {
     public class AddExpenseDTO
     {
@@ -7,6 +9,9 @@
         public int ExpenseBalanceChange { get; set; }
         
         public int AccountId { get; set; }
+
+        public CategoryExpense ExpenseCategory { get; set; }
+
 
     }
 }
