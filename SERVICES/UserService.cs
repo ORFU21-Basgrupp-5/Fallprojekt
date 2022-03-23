@@ -86,7 +86,7 @@ namespace SERVICES
                             throw new Exception("User already exists");
 
                         }
-                    }
+                     }
                     
                     var account = context.Accounts;
                     var newAccount = new Account() { Name = userName + "'s konto" };
@@ -110,7 +110,7 @@ namespace SERVICES
 
                 }
 
-                return "true";
+                return "all good";
             }
             catch (Exception ex)
             {

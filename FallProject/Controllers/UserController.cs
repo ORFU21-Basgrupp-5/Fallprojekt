@@ -82,7 +82,7 @@ namespace API.Controllers
                 return BadRequest("Bad Email");
             }
 
-            return BadRequest();
+            return BadRequest(result);
 
         }
 
