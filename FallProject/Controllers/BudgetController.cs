@@ -29,7 +29,7 @@ namespace API.Controllers
                 Dictionary<string, List<string>> budgetCategories = new Dictionary<string, List<string>>();
                 for (int i = 1; i < result.GetLength(1); i++)
                 {
-                    budgetCategories.Add(result[0,i], new List<string>{result[1,i], result[2,i] } );
+                    budgetCategories.Add(result[0,i], new List<string>{result[1,i], result[2,i], result[3, i], result[4, i] } );
                 };
 
                 var budgetDTO = new RetrieveBudgetDTO

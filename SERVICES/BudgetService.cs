@@ -41,7 +41,7 @@ namespace SERVICES
 
                 var nrOfCategories = Enum.GetValues(typeof(CategoryExpense)).Length;
 
-                string[,] budgetArray = new string [3,nrOfCategories + 1];
+                string[,] budgetArray = new string [5,nrOfCategories + 1];
 
                
                 budgetArray[0,0] = budget.BudgetName;
@@ -61,6 +61,8 @@ namespace SERVICES
                     var totalBudgetAmount = budget.BudgetCategories.First(b => b.BudgeeCategory.ToString() == currentCategoryName).CategoryBudgetAmount;
                     budgetArray[1,i+1] = totalBudgetAmount.ToString();
                     budgetArray[2,i+1] = expenseamont.ToString();
+                    budgetArray[3, i + 1] = (totalBudgetAmount - expenseamont).ToString();
+                    budgetArray[4, i + 1] = (expenseamont * 100 / totalBudgetAmount).ToString() + "%";
                     budgetTotalUse += expenseamont;
                 }
                 budgetArray[2,0] = budgetTotalUse.ToString();
