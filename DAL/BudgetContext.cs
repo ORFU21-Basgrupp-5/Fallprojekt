@@ -21,6 +21,8 @@ namespace DAL
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<Income> Incomes { get; set; }
+        public DbSet<Budget> Budgets { get; set; }
+        public DbSet<BudgetEntries> BudgetsEntries { get; set;}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

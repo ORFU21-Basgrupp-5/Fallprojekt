@@ -16,6 +16,8 @@ namespace DAL.Models
 
         public virtual List<Income> Incomes { get; set; }
         public virtual List<Expense> Expenses { get; set; }
+        public virtual List<Budget> Budgets { get; set; }
+
 
     }
 }

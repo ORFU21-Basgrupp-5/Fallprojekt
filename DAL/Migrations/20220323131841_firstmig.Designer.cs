@@ -12,14 +12,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(BudgetContext))]
-    [Migration("20220302073615_init")]
-    partial class init
+    [Migration("20220323131841_firstmig")]
+    partial class firstmig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.1")
+                .HasAnnotation("ProductVersion", "6.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -50,6 +50,61 @@ namespace DAL.Migrations
                             Balance = 0,
                             Name = "Lönekonto"
                         });
+                });
+
+            modelBuilder.Entity("DAL.Models.Budget", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("AccountId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("BudgetName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Month")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalSum")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
+                    b.ToTable("Budgets");
+                });
+
+            modelBuilder.Entity("DAL.Models.BudgetEntries", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("BudgeeCategory")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("BudgetId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryBudgetAmount")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BudgetId");
+
+                    b.ToTable("BudgetsEntries");
                 });
 
             modelBuilder.Entity("DAL.Models.Expense", b =>
@@ -89,7 +144,7 @@ namespace DAL.Migrations
                             AccountId = 1,
                             CategoryExp = 0,
                             ExpenseBalanceChange = 2200,
-                            ExpenseDate = new DateTime(2022, 3, 2, 8, 36, 15, 282, DateTimeKind.Local).AddTicks(6706),
+                            ExpenseDate = new DateTime(2022, 3, 23, 14, 18, 41, 713, DateTimeKind.Local).AddTicks(3586),
                             ExpenseDescription = "Laga bil"
                         },
                         new
@@ -98,7 +153,7 @@ namespace DAL.Migrations
                             AccountId = 1,
                             CategoryExp = 0,
                             ExpenseBalanceChange = 500,
-                            ExpenseDate = new DateTime(2022, 3, 2, 8, 36, 15, 282, DateTimeKind.Local).AddTicks(6749),
+                            ExpenseDate = new DateTime(2022, 3, 23, 14, 18, 41, 713, DateTimeKind.Local).AddTicks(3617),
                             ExpenseDescription = "Kläder"
                         },
                         new
@@ -107,7 +162,7 @@ namespace DAL.Migrations
                             AccountId = 1,
                             CategoryExp = 0,
                             ExpenseBalanceChange = 300,
-                            ExpenseDate = new DateTime(2022, 3, 2, 8, 36, 15, 282, DateTimeKind.Local).AddTicks(6753),
+                            ExpenseDate = new DateTime(2022, 3, 23, 14, 18, 41, 713, DateTimeKind.Local).AddTicks(3619),
                             ExpenseDescription = "Mat"
                         },
                         new
@@ -116,7 +171,7 @@ namespace DAL.Migrations
                             AccountId = 1,
                             CategoryExp = 0,
                             ExpenseBalanceChange = 400,
-                            ExpenseDate = new DateTime(2022, 3, 2, 8, 36, 15, 282, DateTimeKind.Local).AddTicks(6755),
+                            ExpenseDate = new DateTime(2022, 3, 23, 14, 18, 41, 713, DateTimeKind.Local).AddTicks(3621),
                             ExpenseDescription = "Spel"
                         });
                 });
@@ -158,7 +213,7 @@ namespace DAL.Migrations
                             AccountId = 1,
                             CategoryInc = 0,
                             IncomeBalanceChange = 20000,
-                            IncomeDate = new DateTime(2022, 3, 2, 0, 0, 0, 0, DateTimeKind.Local),
+                            IncomeDate = new DateTime(2022, 3, 23, 0, 0, 0, 0, DateTimeKind.Local),
                             IncomeDescription = "Lön"
                         },
                         new
@@ -167,7 +222,7 @@ namespace DAL.Migrations
                             AccountId = 1,
                             CategoryInc = 0,
                             IncomeBalanceChange = 8,
-                            IncomeDate = new DateTime(2022, 3, 2, 0, 0, 0, 0, DateTimeKind.Local),
+                            IncomeDate = new DateTime(2022, 3, 23, 0, 0, 0, 0, DateTimeKind.Local),
                             IncomeDescription = "Skatteåterbäring"
                         });
                 });
@@ -218,6 +273,20 @@ namespace DAL.Migrations
                         });
                 });
 
+            modelBuilder.Entity("DAL.Models.Budget", b =>
+                {
+                    b.HasOne("DAL.Models.Account", null)
+                        .WithMany("Budgets")
+                        .HasForeignKey("AccountId");
+                });
+
+            modelBuilder.Entity("DAL.Models.BudgetEntries", b =>
+                {
+                    b.HasOne("DAL.Models.Budget", null)
+                        .WithMany("BudgetCategories")
+                        .HasForeignKey("BudgetId");
+                });
+
             modelBuilder.Entity("DAL.Models.Expense", b =>
                 {
                     b.HasOne("DAL.Models.Account", "Account")
@@ -251,9 +320,16 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Models.Account", b =>
                 {
+                    b.Navigation("Budgets");
+
                     b.Navigation("Expenses");
 
                     b.Navigation("Incomes");
+                });
+
+            modelBuilder.Entity("DAL.Models.Budget", b =>
+                {
+                    b.Navigation("BudgetCategories");
                 });
 #pragma warning restore 612, 618
         }

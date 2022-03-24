@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DAL.Migrations
 {
-    public partial class init : Migration
+    public partial class firstmig : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,6 +21,28 @@ namespace DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Accounts", x => x.AccountId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Budgets",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BudgetName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TotalSum = table.Column<int>(type: "int", nullable: false),
+                    Month = table.Column<int>(type: "int", nullable: false),
+                    Year = table.Column<int>(type: "int", nullable: false),
+                    AccountId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Budgets", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Budgets_Accounts_AccountId",
+                        column: x => x.AccountId,
+                        principalTable: "Accounts",
+                        principalColumn: "AccountId");
                 });
 
             migrationBuilder.CreateTable(
@@ -90,6 +112,26 @@ namespace DAL.Migrations
                         principalColumn: "AccountId");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "BudgetsEntries",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BudgeeCategory = table.Column<int>(type: "int", nullable: false),
+                    CategoryBudgetAmount = table.Column<int>(type: "int", nullable: false),
+                    BudgetId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BudgetsEntries", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BudgetsEntries_Budgets_BudgetId",
+                        column: x => x.BudgetId,
+                        principalTable: "Budgets",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.InsertData(
                 table: "Accounts",
                 columns: new[] { "AccountId", "Balance", "Name" },
@@ -100,10 +142,10 @@ namespace DAL.Migrations
                 columns: new[] { "ExpenseId", "AccountId", "CategoryExp", "ExpenseBalanceChange", "ExpenseDate", "ExpenseDescription" },
                 values: new object[,]
                 {
-                    { 1, 1, 0, 2200, new DateTime(2022, 3, 2, 8, 36, 15, 282, DateTimeKind.Local).AddTicks(6706), "Laga bil" },
-                    { 2, 1, 0, 500, new DateTime(2022, 3, 2, 8, 36, 15, 282, DateTimeKind.Local).AddTicks(6749), "Kläder" },
-                    { 3, 1, 0, 300, new DateTime(2022, 3, 2, 8, 36, 15, 282, DateTimeKind.Local).AddTicks(6753), "Mat" },
-                    { 4, 1, 0, 400, new DateTime(2022, 3, 2, 8, 36, 15, 282, DateTimeKind.Local).AddTicks(6755), "Spel" }
+                    { 1, 1, 0, 2200, new DateTime(2022, 3, 23, 14, 18, 41, 713, DateTimeKind.Local).AddTicks(3586), "Laga bil" },
+                    { 2, 1, 0, 500, new DateTime(2022, 3, 23, 14, 18, 41, 713, DateTimeKind.Local).AddTicks(3617), "Kläder" },
+                    { 3, 1, 0, 300, new DateTime(2022, 3, 23, 14, 18, 41, 713, DateTimeKind.Local).AddTicks(3619), "Mat" },
+                    { 4, 1, 0, 400, new DateTime(2022, 3, 23, 14, 18, 41, 713, DateTimeKind.Local).AddTicks(3621), "Spel" }
                 });
 
             migrationBuilder.InsertData(
@@ -111,14 +153,24 @@ namespace DAL.Migrations
                 columns: new[] { "IncomeId", "AccountId", "CategoryInc", "IncomeBalanceChange", "IncomeDate", "IncomeDescription" },
                 values: new object[,]
                 {
-                    { 1, 1, 0, 20000, new DateTime(2022, 3, 2, 0, 0, 0, 0, DateTimeKind.Local), "Lön" },
-                    { 2, 1, 0, 8, new DateTime(2022, 3, 2, 0, 0, 0, 0, DateTimeKind.Local), "Skatteåterbäring" }
+                    { 1, 1, 0, 20000, new DateTime(2022, 3, 23, 0, 0, 0, 0, DateTimeKind.Local), "Lön" },
+                    { 2, 1, 0, 8, new DateTime(2022, 3, 23, 0, 0, 0, 0, DateTimeKind.Local), "Skatteåterbäring" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "AccountId", "Email", "Password", "UserName" },
                 values: new object[] { 1, 1, "Test@test.se", "rm/sAiqLgg4nwxJ20sht7IuoLJESlJ54I6QksDKmiQk=@jB1fjqC/s+7s+frCkBnQnw==", "TestKonto1" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Budgets_AccountId",
+                table: "Budgets",
+                column: "AccountId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BudgetsEntries_BudgetId",
+                table: "BudgetsEntries",
+                column: "BudgetId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Expenses_AccountId",
@@ -145,6 +197,9 @@ namespace DAL.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "BudgetsEntries");
+
+            migrationBuilder.DropTable(
                 name: "Expenses");
 
             migrationBuilder.DropTable(
@@ -152,6 +207,9 @@ namespace DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Budgets");
 
             migrationBuilder.DropTable(
                 name: "Accounts");
