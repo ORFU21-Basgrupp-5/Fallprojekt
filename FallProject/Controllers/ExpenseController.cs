@@ -12,14 +12,14 @@ namespace API.Controllers
     
     [Route("api/[controller]")]
     [ApiController]
-    public class ExpensesController : ControllerBase
+    public class ExpenseController : ControllerBase
     {
         [Authorize]
         [HttpGet]
         public IActionResult List()
         {
             try {
-            var service = new ExpensesServices();
+            var service = new ExpenseServices();
             var result = new List<ExpenseDTO>();
             string id;
             object value;
@@ -55,7 +55,7 @@ namespace API.Controllers
             
             try
             {
-                ExpensesServices.Instance.InputExpenses(addExpenseDTO.ExpenseBalanceChange, addExpenseDTO.AccountId, addExpenseDTO.ExpenseDescription, addExpenseDTO.ExpenseDate, addExpenseDTO.ExpenseCategory);
+                ExpenseServices.Instance.InputExpenses(addExpenseDTO.ExpenseBalanceChange, addExpenseDTO.AccountId, addExpenseDTO.ExpenseDescription, addExpenseDTO.ExpenseDate, addExpenseDTO.ExpenseCategory);
 
                 return Ok();
             }
