@@ -10,12 +10,12 @@ using System.Web.Http.Results;
 namespace API.Controllers
 {
     
-    [Route("Expenses")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ExpensesController : ControllerBase
     {
         [Authorize]
-        [HttpGet("/ListExpenses")]
+        [HttpGet]
         public IActionResult List()
         {
             try {
@@ -50,7 +50,6 @@ namespace API.Controllers
         //[HttpPost]
         [Authorize]
         [HttpPost]
-        [Route("AddExpense")]
         public IActionResult AddExpense(AddExpenseDTO addExpenseDTO)
         {
             

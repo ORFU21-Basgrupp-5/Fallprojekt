@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace API.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class UserController : Controller
     {

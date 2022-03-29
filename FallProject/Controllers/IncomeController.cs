@@ -8,11 +8,12 @@ using System.Linq;
 
 namespace API.Controllers
 {
-    [Route("Income")]
+    [Route("api/[controller]")]
     [ApiController]
     public class IncomeController : ControllerBase
     {
-        [HttpGet("/ListIncome")]
+        [Authorize]
+        [HttpGet]
         public IActionResult List()
         {
             var service = new IncomeServices();
@@ -42,7 +43,6 @@ namespace API.Controllers
         //[HttpPost]
         [Authorize]
         [HttpPost]
-        [Route("AddIncome")]
         public IActionResult AddIncome(AddIncomeDTO addIncomeDTO)
         {
             
@@ -61,7 +61,6 @@ namespace API.Controllers
         [AllowAnonymous]
         [HttpGet]
         [Route("categories")]
-
         public IActionResult GetCategories()
         { 
             try

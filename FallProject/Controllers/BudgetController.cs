@@ -14,7 +14,7 @@ namespace API.Controllers
     {
 
         [Authorize]
-        [HttpGet("RetrieveBudget")]
+        [HttpGet]
         public IActionResult ShowCurentBudget ()
         {
            
@@ -49,7 +49,7 @@ namespace API.Controllers
             }
         }
         [Authorize]
-        [HttpPost("Create")]
+        [HttpPost]
         public IActionResult CreateBudget(CreateBudgetDTO Budget)
         {
             object value;
