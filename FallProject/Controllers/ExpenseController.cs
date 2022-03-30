@@ -26,7 +26,7 @@ namespace API.Controllers
             ControllerContext.HttpContext.Items.TryGetValue("Username", out value);
 
             var username = value.ToString();
-            Console.WriteLine(username);
+            
             foreach (var expenses in service.ListAllExpenses(username))
             {
                 result.Add(

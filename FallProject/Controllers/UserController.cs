@@ -38,6 +38,7 @@ namespace API.Controllers
                 var result = UserService.Instance.Login(userLoginDTO.UserName, userLoginDTO.Password);
                 if (result != "")
                 {
+                    Console.WriteLine(result);
                     var generatedToken = _tokenService.BuildToken(_configuration["Jwt:Key"].ToString(), _configuration["Jwt:Issuer"].ToString(), result);
                     return Ok(new
                     {
