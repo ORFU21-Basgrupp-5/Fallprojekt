@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace API.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class UserController : Controller
     {
@@ -38,6 +38,7 @@ namespace API.Controllers
                 var result = UserService.Instance.Login(userLoginDTO.UserName, userLoginDTO.Password);
                 if (result != "")
                 {
+                    Console.WriteLine(result);
                     var generatedToken = _tokenService.BuildToken(_configuration["Jwt:Key"].ToString(), _configuration["Jwt:Issuer"].ToString(), result);
                     return Ok(new
                     {

@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace SERVICES
 {
-    public class ExpensesServices
+    public class ExpenseServices
     {
-        private static ExpensesServices _instance;
-        public static ExpensesServices Instance
+        private static ExpenseServices _instance;
+        public static ExpenseServices Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = new ExpensesServices();
+                    _instance = new ExpenseServices();
                 }
                 return _instance;
             }
