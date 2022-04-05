@@ -26,10 +26,11 @@ namespace API.Controllers
         public IActionResult Login(UserLoginDTO userLoginDTO)
         {
 
+
             try
             {
                 if (string.IsNullOrEmpty(userLoginDTO.UserName) || string.IsNullOrEmpty(userLoginDTO.Password))
-                {
+                {              
                     throw new Exception("Måste fylla i samtliga fält");
                 }
 
@@ -47,6 +48,7 @@ namespace API.Controllers
                 }
                 else 
                 {
+                    Console.WriteLine("test3");
                     throw new Exception("Kunde inte logga in");
                         
                 }
@@ -75,7 +77,17 @@ namespace API.Controllers
             var result = UserService.Instance.RegisterNewAccount(newUser.UserName, newUser.Password, newUser.Email);
             if (result == "all good")
             {
-                return Ok(result);
+                var newUserLoginResult = UserService.Instance.Login(newUser.UserName, newUser.Password);
+                if(newUserLoginResult != "")
+                {
+                    var generatedToken = _tokenService.BuildToken(_configuration["Jwt:Key"].ToString(), _configuration["Jwt:Issuer"].ToString(), newUserLoginResult);
+                    return Ok(new
+                    {
+                        token = generatedToken,
+                        user = result
+                    });
+                }
+                return BadRequest("Login Error");
             }
             else if (result == "bad email")
             {
@@ -103,7 +115,7 @@ namespace API.Controllers
 
             return BadRequest(result);
         }
-
+        
         [HttpPost("SendRecoveryEmail")]
         public IActionResult SendEmail(RecoveryDTO recoveryDTO)
         {
