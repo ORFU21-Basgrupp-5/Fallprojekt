@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(BudgetContext))]
-    [Migration("20220324073922_add-migration firstmig")]
-    partial class addmigrationfirstmig
+    [Migration("20220615082627_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -144,7 +144,7 @@ namespace DAL.Migrations
                             AccountId = 1,
                             CategoryExp = 0,
                             ExpenseBalanceChange = 2200,
-                            ExpenseDate = new DateTime(2022, 3, 24, 8, 39, 21, 903, DateTimeKind.Local).AddTicks(4924),
+                            ExpenseDate = new DateTime(2022, 6, 15, 10, 26, 27, 804, DateTimeKind.Local).AddTicks(8611),
                             ExpenseDescription = "Laga bil"
                         },
                         new
@@ -153,7 +153,7 @@ namespace DAL.Migrations
                             AccountId = 1,
                             CategoryExp = 0,
                             ExpenseBalanceChange = 500,
-                            ExpenseDate = new DateTime(2022, 3, 24, 8, 39, 21, 903, DateTimeKind.Local).AddTicks(4966),
+                            ExpenseDate = new DateTime(2022, 6, 15, 10, 26, 27, 804, DateTimeKind.Local).AddTicks(8645),
                             ExpenseDescription = "Kläder"
                         },
                         new
@@ -162,7 +162,7 @@ namespace DAL.Migrations
                             AccountId = 1,
                             CategoryExp = 0,
                             ExpenseBalanceChange = 300,
-                            ExpenseDate = new DateTime(2022, 3, 24, 8, 39, 21, 903, DateTimeKind.Local).AddTicks(4968),
+                            ExpenseDate = new DateTime(2022, 6, 15, 10, 26, 27, 804, DateTimeKind.Local).AddTicks(8647),
                             ExpenseDescription = "Mat"
                         },
                         new
@@ -171,7 +171,7 @@ namespace DAL.Migrations
                             AccountId = 1,
                             CategoryExp = 0,
                             ExpenseBalanceChange = 400,
-                            ExpenseDate = new DateTime(2022, 3, 24, 8, 39, 21, 903, DateTimeKind.Local).AddTicks(4969),
+                            ExpenseDate = new DateTime(2022, 6, 15, 10, 26, 27, 804, DateTimeKind.Local).AddTicks(8649),
                             ExpenseDescription = "Spel"
                         });
                 });
@@ -213,7 +213,7 @@ namespace DAL.Migrations
                             AccountId = 1,
                             CategoryInc = 0,
                             IncomeBalanceChange = 20000,
-                            IncomeDate = new DateTime(2022, 3, 24, 0, 0, 0, 0, DateTimeKind.Local),
+                            IncomeDate = new DateTime(2022, 6, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             IncomeDescription = "Lön"
                         },
                         new
@@ -222,7 +222,7 @@ namespace DAL.Migrations
                             AccountId = 1,
                             CategoryInc = 0,
                             IncomeBalanceChange = 8,
-                            IncomeDate = new DateTime(2022, 3, 24, 0, 0, 0, 0, DateTimeKind.Local),
+                            IncomeDate = new DateTime(2022, 6, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             IncomeDescription = "Skatteåterbäring"
                         });
                 });

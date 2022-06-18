@@ -25,24 +25,25 @@ namespace SERVICES
         }
 
 
-        public void InputExpenses(int saldo, int accountId, string description,DateTime date, CategoryExpense category)
+        public void InputExpenses(int saldo, string description,DateTime date, CategoryExpense category, string username)
 
         {
             using (var context = new BudgetContext())
             {
                 var expense = context.Expenses;
+                var user = context.Users.First(a => a.UserName == username);
                 var newExpense = new Expense()
                 {
                     ExpenseDate = date,
                     ExpenseDescription = description,
-                    AccountId = accountId,
+                    AccountId = user.Account.AccountId,
                     ExpenseBalanceChange = saldo,
                     CategoryExp = category
                 };
                 expense.Add(newExpense);
 
 
-                var changed = context.Accounts.First(a => a.AccountId == accountId);
+                var changed = context.Accounts.First(a => a.AccountId == user.Account.AccountId);
                 changed.Balance = changed.Balance - saldo;
 
                 context.SaveChanges();

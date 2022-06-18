@@ -8,7 +8,6 @@ namespace API.DTO
         public string ExpenseDescription { get; set; }
         public int ExpenseBalanceChange { get; set; }
         
-        public int AccountId { get; set; }
 
         public CategoryExpense ExpenseCategory { get; set; }
 

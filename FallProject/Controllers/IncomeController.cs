@@ -48,7 +48,10 @@ namespace API.Controllers
             
             try
             {
-                IncomeServices.Instance.InputIncome(addIncomeDTO.IncomeBalanceChange, addIncomeDTO.AccountId, addIncomeDTO.IncomeDescription, addIncomeDTO.IncomeDate, addIncomeDTO.IncomeCategory);
+                object value;
+                ControllerContext.HttpContext.Items.TryGetValue("Username", out value);
+                var username = value.ToString();
+                IncomeServices.Instance.InputIncome(addIncomeDTO.IncomeBalanceChange, addIncomeDTO.IncomeDescription, addIncomeDTO.IncomeDate, addIncomeDTO.IncomeCategory, username);
                 return Ok();
             }
             catch (Exception ex)

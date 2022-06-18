@@ -55,7 +55,10 @@ namespace API.Controllers
             
             try
             {
-                ExpenseServices.Instance.InputExpenses(addExpenseDTO.ExpenseBalanceChange, addExpenseDTO.AccountId, addExpenseDTO.ExpenseDescription, addExpenseDTO.ExpenseDate, addExpenseDTO.ExpenseCategory);
+                object value;
+                ControllerContext.HttpContext.Items.TryGetValue("Username", out value);
+                var username = value.ToString();
+                ExpenseServices.Instance.InputExpenses(addExpenseDTO.ExpenseBalanceChange, addExpenseDTO.ExpenseDescription, addExpenseDTO.ExpenseDate, addExpenseDTO.ExpenseCategory, username);
 
                 return Ok();
             }
