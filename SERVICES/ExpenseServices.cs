@@ -42,7 +42,7 @@ namespace SERVICES
                 expense.Add(newExpense);
 
 
-                var changed = context.Accounts.First(a => a.AccountId == accountId);
+                var changed = context.Accounts.FirstOrDefault(a => a.AccountId == accountId);
                 changed.Balance = changed.Balance - saldo;
 
                 context.SaveChanges();
