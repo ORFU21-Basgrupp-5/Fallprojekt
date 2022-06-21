@@ -59,7 +59,11 @@ namespace API.Controllers
             string result = BudgetService.Instance.AddBudget(Budget.Name, Budget.TotalSum, Budget.Month, Budget.Year, Budget.CategoriesAndAmount, username);
             if(result == "Added")
             {
-                return Ok(result);
+                return Ok(new
+                {
+                    message = result,
+                    statu = true
+                });
             }
             return BadRequest(result);
         }

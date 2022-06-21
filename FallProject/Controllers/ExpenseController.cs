@@ -57,7 +57,11 @@ namespace API.Controllers
             {
                 ExpenseServices.Instance.InputExpenses(addExpenseDTO.ExpenseBalanceChange, addExpenseDTO.AccountId, addExpenseDTO.ExpenseDescription, addExpenseDTO.ExpenseDate, addExpenseDTO.ExpenseCategory);
 
-                return Ok();
+                return Ok(new
+                {
+                    message = "Expense Added",
+                    statu = true
+                });
             }
             catch (Exception ex)
             {

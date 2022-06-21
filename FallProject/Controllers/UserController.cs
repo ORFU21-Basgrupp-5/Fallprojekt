@@ -76,12 +76,12 @@ namespace API.Controllers
             var result = UserService.Instance.RegisterNewAccount(newUser.UserName, newUser.Password, newUser.Email);
             if (result == "all good")
             {
-                return Ok(result);
+                return Ok(new
+                {
+                    message = result,
+                statu = true});
             }
-            else if (result == "bad email")
-            {
-                return BadRequest("Bad Email");
-            }
+
 
             return BadRequest(result);
 

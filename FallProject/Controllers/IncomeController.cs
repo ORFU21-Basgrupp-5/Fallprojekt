@@ -49,7 +49,11 @@ namespace API.Controllers
             try
             {
                 IncomeServices.Instance.InputIncome(addIncomeDTO.IncomeBalanceChange, addIncomeDTO.AccountId, addIncomeDTO.IncomeDescription, addIncomeDTO.IncomeDate, addIncomeDTO.IncomeCategory);
-                return Ok();
+                return Ok(new
+                {
+                    message = "Income Added",
+                    statu = true
+                });
             }
             catch (Exception ex)
             {

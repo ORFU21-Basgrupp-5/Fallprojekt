@@ -83,7 +83,7 @@ namespace SERVICES
                         if (userexist.UserName == userName)
                         {
 
-                            throw new Exception("User already exists");
+                            return("User already exists");
 
                         }
                      }
@@ -105,7 +105,7 @@ namespace SERVICES
                     }
                     if (!match.Success)
                     {
-                         throw new Exception("bad email");
+                         return("bad email");
                     }
 
                 }
