@@ -59,11 +59,21 @@ namespace SERVICES
                         .Select(e => e.ExpenseBalanceChange)
                         .Sum();
                     var totalBudgetAmount = budget.BudgetCategories.First(b => b.BudgeeCategory.ToString() == currentCategoryName).CategoryBudgetAmount;
-                    budgetArray[1,i+1] = totalBudgetAmount.ToString();
-                    budgetArray[2,i+1] = expenseamont.ToString();
-                    budgetArray[3, i + 1] = (totalBudgetAmount - expenseamont).ToString();
-                    budgetArray[4, i + 1] = (expenseamont * 100 / totalBudgetAmount).ToString() + "%";
+                   
+                        budgetArray[1, i + 1] = totalBudgetAmount.ToString();
+                        budgetArray[2, i + 1] = expenseamont.ToString();
+                        budgetArray[3, i + 1] = (totalBudgetAmount - expenseamont).ToString();
+                    if (totalBudgetAmount != 0)
+                    {
+                        budgetArray[4, i + 1] = (expenseamont * 100 / totalBudgetAmount).ToString() + "%";
+                    }
+                    else
+                    {
+                        budgetArray[4, i + 1] = "0";
+                    }
                     budgetTotalUse += expenseamont;
+                    
+                    
                 }
                 budgetArray[2,0] = budgetTotalUse.ToString();
 

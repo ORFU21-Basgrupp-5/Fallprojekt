@@ -43,8 +43,9 @@ namespace API.Controllers
 
                 return Ok(budgetDTO);
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e);
                 return BadRequest("Oops");
             }
         }
