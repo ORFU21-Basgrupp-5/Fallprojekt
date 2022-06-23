@@ -14,7 +14,7 @@ namespace API.Controllers
     {
 
         [Authorize]
-        [HttpGet("RetrieveBudget")]
+        [HttpGet]
         public IActionResult ShowCurentBudget ()
         {
            
@@ -43,13 +43,14 @@ namespace API.Controllers
 
                 return Ok(budgetDTO);
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e);
                 return BadRequest("Oops");
             }
         }
         [Authorize]
-        [HttpPost("Create")]
+        [HttpPost]
         public IActionResult CreateBudget(CreateBudgetDTO Budget)
         {
             object value;
@@ -59,7 +60,11 @@ namespace API.Controllers
             string result = BudgetService.Instance.AddBudget(Budget.Name, Budget.TotalSum, Budget.Month, Budget.Year, Budget.CategoriesAndAmount, username);
             if(result == "Added")
             {
-                return Ok(result);
+                return Ok(new
+                {
+                    message = result,
+                    statu = true
+                });
             }
             return BadRequest(result);
         }

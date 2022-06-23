@@ -5,28 +5,28 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SERVICES;
 using System.Net;
-using System.Web.Http.Results;
+//using System.Web.Http.Results;
 
 namespace API.Controllers
 {
     
-    [Route("Expenses")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class ExpensesController : ControllerBase
+    public class ExpenseController : ControllerBase
     {
         [Authorize]
-        [HttpGet("/ListExpenses")]
+        [HttpGet]
         public IActionResult List()
         {
             try {
-            var service = new ExpensesServices();
+            var service = new ExpenseServices();
             var result = new List<ExpenseDTO>();
             string id;
             object value;
             ControllerContext.HttpContext.Items.TryGetValue("Username", out value);
 
             var username = value.ToString();
-            Console.WriteLine(username);
+            
             foreach (var expenses in service.ListAllExpenses(username))
             {
                 result.Add(
@@ -50,15 +50,18 @@ namespace API.Controllers
         //[HttpPost]
         [Authorize]
         [HttpPost]
-        [Route("AddExpense")]
         public IActionResult AddExpense(AddExpenseDTO addExpenseDTO)
         {
             
             try
             {
-                ExpensesServices.Instance.InputExpenses(addExpenseDTO.ExpenseBalanceChange, addExpenseDTO.AccountId, addExpenseDTO.ExpenseDescription, addExpenseDTO.ExpenseDate, addExpenseDTO.ExpenseCategory);
+                ExpenseServices.Instance.InputExpenses(addExpenseDTO.ExpenseBalanceChange, addExpenseDTO.AccountId, addExpenseDTO.ExpenseDescription, addExpenseDTO.ExpenseDate, addExpenseDTO.ExpenseCategory);
 
-                return Ok();
+                return Ok(new
+                {
+                    message = "Expense Added",
+                    statu = true
+                });
             }
             catch (Exception ex)
             {

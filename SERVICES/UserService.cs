@@ -83,10 +83,10 @@ namespace SERVICES
                         if (userexist.UserName == userName)
                         {
 
-                            throw new Exception("User already exists");
+                            return("User already exists");
 
                         }
-                    }
+                     }
                     
                     var account = context.Accounts;
                     var newAccount = new Account() { Name = userName + "'s konto" };
@@ -105,12 +105,12 @@ namespace SERVICES
                     }
                     if (!match.Success)
                     {
-                         throw new Exception("bad email");
+                         return("bad email");
                     }
 
                 }
 
-                return "true";
+                return "all good";
             }
             catch (Exception ex)
             {

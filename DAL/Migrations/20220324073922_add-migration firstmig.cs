@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DAL.Migrations
 {
-    public partial class firstmig : Migration
+    public partial class addmigrationfirstmig : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -142,10 +142,10 @@ namespace DAL.Migrations
                 columns: new[] { "ExpenseId", "AccountId", "CategoryExp", "ExpenseBalanceChange", "ExpenseDate", "ExpenseDescription" },
                 values: new object[,]
                 {
-                    { 1, 1, 0, 2200, new DateTime(2022, 3, 23, 14, 18, 41, 713, DateTimeKind.Local).AddTicks(3586), "Laga bil" },
-                    { 2, 1, 0, 500, new DateTime(2022, 3, 23, 14, 18, 41, 713, DateTimeKind.Local).AddTicks(3617), "Kläder" },
-                    { 3, 1, 0, 300, new DateTime(2022, 3, 23, 14, 18, 41, 713, DateTimeKind.Local).AddTicks(3619), "Mat" },
-                    { 4, 1, 0, 400, new DateTime(2022, 3, 23, 14, 18, 41, 713, DateTimeKind.Local).AddTicks(3621), "Spel" }
+                    { 1, 1, 0, 2200, new DateTime(2022, 3, 24, 8, 39, 21, 903, DateTimeKind.Local).AddTicks(4924), "Laga bil" },
+                    { 2, 1, 0, 500, new DateTime(2022, 3, 24, 8, 39, 21, 903, DateTimeKind.Local).AddTicks(4966), "Kläder" },
+                    { 3, 1, 0, 300, new DateTime(2022, 3, 24, 8, 39, 21, 903, DateTimeKind.Local).AddTicks(4968), "Mat" },
+                    { 4, 1, 0, 400, new DateTime(2022, 3, 24, 8, 39, 21, 903, DateTimeKind.Local).AddTicks(4969), "Spel" }
                 });
 
             migrationBuilder.InsertData(
@@ -153,8 +153,8 @@ namespace DAL.Migrations
                 columns: new[] { "IncomeId", "AccountId", "CategoryInc", "IncomeBalanceChange", "IncomeDate", "IncomeDescription" },
                 values: new object[,]
                 {
-                    { 1, 1, 0, 20000, new DateTime(2022, 3, 23, 0, 0, 0, 0, DateTimeKind.Local), "Lön" },
-                    { 2, 1, 0, 8, new DateTime(2022, 3, 23, 0, 0, 0, 0, DateTimeKind.Local), "Skatteåterbäring" }
+                    { 1, 1, 0, 20000, new DateTime(2022, 3, 24, 0, 0, 0, 0, DateTimeKind.Local), "Lön" },
+                    { 2, 1, 0, 8, new DateTime(2022, 3, 24, 0, 0, 0, 0, DateTimeKind.Local), "Skatteåterbäring" }
                 });
 
             migrationBuilder.InsertData(
@@ -186,6 +186,12 @@ namespace DAL.Migrations
                 name: "IX_Users_AccountId",
                 table: "Users",
                 column: "AccountId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Email",
+                table: "Users",
+                column: "Email",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_UserName",

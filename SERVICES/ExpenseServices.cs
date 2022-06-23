@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace SERVICES
 {
-    public class ExpensesServices
+    public class ExpenseServices
     {
-        private static ExpensesServices _instance;
-        public static ExpensesServices Instance
+        private static ExpenseServices _instance;
+        public static ExpenseServices Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = new ExpensesServices();
+                    _instance = new ExpenseServices();
                 }
                 return _instance;
             }
@@ -42,7 +42,7 @@ namespace SERVICES
                 expense.Add(newExpense);
 
 
-                var changed = context.Accounts.First(a => a.AccountId == accountId);
+                var changed = context.Accounts.FirstOrDefault(a => a.AccountId == accountId);
                 changed.Balance = changed.Balance - saldo;
 
                 context.SaveChanges();
